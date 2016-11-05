@@ -4,9 +4,9 @@
 DROP TABLE account CASCADE CONSTRAINTS;
 CREATE TABLE account (
   username varchar(15) not null,
-  password varchar(15) not null,
-  is_admin char not null check(is_admin in (0,1)),
-  is_seller char not null check(is_seller in (0,1)),
+  password varchar(25) not null,
+  is_admin char default 0 not null check(is_admin in (0,1)),
+  is_seller char default 0 not null check(is_seller in (0,1)),  --do we actually need this? sellers have auctions non sellers dont
   CONSTRAINT pk_account primary key(username)
 );
 
@@ -14,7 +14,7 @@ CREATE TABLE account (
 DROP TABLE customer CASCADE CONSTRAINTS;
 CREATE TABLE customer (
   username varchar(15) not null,
-  phone varchar(10),
+  phone char(10),
   email varchar(254),
   fname varchar(25),
   lname varchar(25),
@@ -32,8 +32,8 @@ CREATE TABLE auction (
   start_time date not null,
   end_time date not null,
   starting_price number(*, 2) not null,
-  item_name varchar(25) not null,
-  item_description varchar(300),
+  item_name varchar(60) not null,
+  item_description varchar(4000),
   item_category varchar(25), --should maybe have a table for these? could ask Imad
   CONSTRAINT pk_auction primary key(item_id),
   CONSTRAINT fk_auction_to_account 
