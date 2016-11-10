@@ -24,7 +24,7 @@ end;
 -- test:
 select get_status(3) from dual;
 
---get current bid
+--get current bid -- may fail when bids are equal
 create or replace function get_current_bid(item string) return number as
 current_bid integer;
 begin
@@ -38,5 +38,23 @@ end;
 --test
 select auction_id, customer, MAXIMUM_BID_LIMIT from bid where AUCTION_ID = 3;
 select get_current_bid(3) as current_bid from dual;
+
+
+--get_current_winner (will currently fail with multiple equal bids)
+create or replace function get_current_winner(item string) return string as
+current_winner varchar(15);
+begin
+  select customer into current_winner
+  from bid
+  where maximum_bid_limit = (
+    Select max(maximum_bid_limit) from bid 
+    where auction_id = item) 
+  and auction_id = item;
+  
+  return current_winner;
+end;
+  
+select auction_id, customer, MAXIMUM_BID_LIMIT from bid where AUCTION_ID = 3;
+select get_current_winner(3) as current_winner from dual;
 
 
