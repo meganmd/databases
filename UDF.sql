@@ -24,3 +24,19 @@ end;
 -- test:
 select get_status(3) from dual;
 
+--get current bid
+create or replace function get_current_bid(item string) return number as
+current_bid integer;
+begin
+  select max(maximum_bid_limit) into current_bid
+  from bid
+  where maximum_bid_limit < (Select max(maximum_bid_limit) from bid where auction_id = item) and AUCTION_ID = item;
+  
+  return current_bid;
+end;
+
+--test
+select auction_id, customer, MAXIMUM_BID_LIMIT from bid where AUCTION_ID = 3;
+select get_current_bid(3) as current_bid from dual;
+
+
