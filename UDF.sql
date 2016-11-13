@@ -24,20 +24,28 @@ end;
 -- test:
 select get_status(3) from dual;
 
---get current bid -- may fail when bids are equal
+--get current bid -- will fail when bids are equal
 create or replace function get_current_bid(item string) return number as
 current_bid integer;
 begin
-  select max(maximum_bid_limit) into current_bid
-  from bid
-  where maximum_bid_limit < (Select max(maximum_bid_limit) from bid where auction_id = item) and AUCTION_ID = item;
-  
+  select maximum_bid_limit into current_bid
+  from (
+    select maximum_bid_limit, row_number() over(order by maximum_bid_limit desc, bid_time asc) as rownumber
+    from bid
+    where auction_id = item
+  )
+  where rownumber = 2;
+
+--  select max(maximum_bid_limit) into current_bid
+--  from bid
+--  where maximum_bid_limit < (Select max(maximum_bid_limit) from bid where auction_id = item) and AUCTION_ID = item;
+--  
   return current_bid;
 end;
 
 --test
 select auction_id, customer, MAXIMUM_BID_LIMIT from bid where AUCTION_ID = 3;
-select get_current_bid(3) as current_bid from dual;
+select get_current_bid(1) as current_bid from dual;
 
 
 --get_current_winner (will currently fail with multiple equal bids)
@@ -45,16 +53,24 @@ create or replace function get_current_winner(item string) return string as
 current_winner varchar(15);
 begin
   select customer into current_winner
-  from bid
-  where maximum_bid_limit = (
-    Select max(maximum_bid_limit) from bid 
-    where auction_id = item) 
-  and auction_id = item;
+  from (
+    select customer, row_number() over(order by maximum_bid_limit desc, bid_time asc) as rownumber
+    from bid
+    where auction_id = item
+  )
+  where rownumber = 1;
+
+--  select customer into current_winner
+--  from bid
+--  where maximum_bid_limit = (
+--    Select max(maximum_bid_limit) from bid 
+--    where auction_id = item) 
+--  and auction_id = item;
   
   return current_winner;
 end;
   
 select auction_id, customer, MAXIMUM_BID_LIMIT from bid where AUCTION_ID = 3;
-select get_current_winner(3) as current_winner from dual;
+select get_current_winner(1) as current_winner from dual;
 
 
