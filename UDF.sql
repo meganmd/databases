@@ -73,4 +73,17 @@ end;
 select auction_id, customer, MAXIMUM_BID_LIMIT from bid where AUCTION_ID = 3;
 select get_current_winner(1) as current_winner from dual;
 
-
+create or replace function has_feedback(item string) return number as
+has_feedback number;
+begin
+  select case 
+    when exists(
+      select * 
+      from feedback
+      where auction = item
+    ) then 1 else 0
+  end
+  into has_feedback
+  from dual;
+  return has_feedback;
+end;
