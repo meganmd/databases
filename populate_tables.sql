@@ -1,3 +1,5 @@
+-- author = megan
+
 --Add accounts
 INSERT INTO account values('emininem ', 'musiciscool', 0, 0);
 INSERT INTO account values('admin', 'super', 1, 0);

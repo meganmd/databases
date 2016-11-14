@@ -1,4 +1,5 @@
 --This is initializer where create tables will go
+--author = megan
 
 --Account
 DROP TABLE account CASCADE CONSTRAINTS;

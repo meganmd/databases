@@ -1,6 +1,8 @@
---functions procedures and views
+-- author = megan
 
---get status
+--functions 
+
+--get status of an auction
 create or replace function get_status(item string) return string as
 status varchar2(15);
 begin
@@ -21,10 +23,12 @@ begin
   return status;
 end;
 
--- test:
+-- test with:
 select get_status(3) from dual;
 
---get current bid -- will fail when bids are equal
+-- get current bid where current bid is the second highest maximum bid
+-- used row numbers to select so that if multiple bids had the highest maximum 
+-- bid value the query would pick the second ranking value for the current_bid
 create or replace function get_current_bid(item string) return number as
 current_bid integer;
 begin
@@ -35,11 +39,6 @@ begin
     where auction_id = item
   )
   where rownumber = 2;
-
---  select max(maximum_bid_limit) into current_bid
---  from bid
---  where maximum_bid_limit < (Select max(maximum_bid_limit) from bid where auction_id = item) and AUCTION_ID = item;
---  
   return current_bid;
 end;
 
@@ -48,7 +47,9 @@ select auction_id, customer, MAXIMUM_BID_LIMIT from bid where AUCTION_ID = 3;
 select get_current_bid(1) as current_bid from dual;
 
 
---get_current_winner (will currently fail with multiple equal bids)
+-- gets current winner where the winner is the first person to have the highest 
+-- maximimum bid limit. Again, uses row numbers and ordering instead of 
+-- equal to maximum to more easily return only one row.
 create or replace function get_current_winner(item string) return string as
 current_winner varchar(15);
 begin
@@ -59,20 +60,14 @@ begin
     where auction_id = item
   )
   where rownumber = 1;
-
---  select customer into current_winner
---  from bid
---  where maximum_bid_limit = (
---    Select max(maximum_bid_limit) from bid 
---    where auction_id = item) 
---  and auction_id = item;
-  
   return current_winner;
 end;
   
+-- test:
 select auction_id, customer, MAXIMUM_BID_LIMIT from bid where AUCTION_ID = 3;
 select get_current_winner(1) as current_winner from dual;
 
+-- Checks if there exists an entry in the feedback table for a given auction.
 create or replace function has_feedback(item string) return number as
 has_feedback number;
 begin
