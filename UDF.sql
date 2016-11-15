@@ -94,3 +94,16 @@ begin
   where seller = seller_username;
   return rating;
 end;
+
+select seller_average_rating('user1') from dual;
+
+create or replace function seller_number_of_auctions(seller_username string) return number as
+amount number;
+begin
+  select count(*) into amount
+  from auction
+  where seller = seller_username;
+  return amount;
+end;
+
+select seller_number_of_auctions('user1') from dual;
