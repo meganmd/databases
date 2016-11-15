@@ -9,4 +9,5 @@ SELECT C.username,
        C.lname,
        C.email,
       A.password
-FROM (CUSTOMER C JOIN ACCOUNT A ON C.USERNAME = A.USERNAME)
+      
+FROM (CUSTOMER C JOIN ACCOUNT A ON C.USERNAME = A.USERNAME);
