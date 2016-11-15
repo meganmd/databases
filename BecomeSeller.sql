@@ -1,3 +1,5 @@
+--Author: Ellen
+
 create or replace trigger become_seller
 AFTER INSERT
 ON AUCTION
