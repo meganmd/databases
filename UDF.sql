@@ -50,7 +50,7 @@ select get_current_bid(1) as current_bid from dual;
 -- gets current winner where the winner is the first person to have the highest 
 -- maximimum bid limit. Again, uses row numbers and ordering instead of 
 -- equal to maximum to more easily return only one row.
-create or replace function get_current_winner(item string) return string as
+create or replace function get_current_winner(item string) return varchar as
 current_winner varchar(15);
 begin
   select customer into current_winner
@@ -81,4 +81,16 @@ begin
   into has_feedback
   from dual;
   return has_feedback;
+end;
+
+-- Averages overall ratings for each seller
+create or replace function seller_average_rating(seller_username string) return number as
+rating number;
+begin
+  select AVG(overall_rating) into rating
+  from (
+    auction natural join feedback
+  )
+  where seller = seller_username;
+  return rating;
 end;
