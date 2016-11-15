@@ -7,12 +7,12 @@ create or replace function Login_Func(username string, password string) Return I
   AS
     answer int := 0;
     loginBoolean1 int :=0;
-    username1 int :='';
-		password1 int := '';
 	Begin
 		Select Count(*) into loginBoolean1 from ACCOUNT where username= USERNAME AND password = PASSWORD;
 		If  (loginBoolean1>0) Then
 			answer := 1;
 		End If;
 		Return  answer;
-	End ;
+	End;
+  
+--select Login_Func('admin','super') from dual;
