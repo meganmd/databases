@@ -5,8 +5,8 @@ SELECT
 A.ITEM_CATEGORY,
 A.ITEM_ID, 
 A.ITEM_NAME,
-B.MAXIMUM_BID_LIMIT,
-B.MAXIMUM_BID_LIMIT *0.05 AS "COMMISSION"
+A.current_bid,
+A.current_bid * 0.05 as commission
 
-FROM (AUCTION A JOIN BID B ON A.ITEM_ID = B.AUCTION_ID);
---WHERE STATUS = 'SOLD';  --Im not sure how to do this yet
+FROM expanded_auction A
+where status = 'SOLD';
