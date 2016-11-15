@@ -1,0 +1,12 @@
+create or replace trigger become_seller
+AFTER INSERT
+ON AUCTION
+for each row
+Begin
+  UPDATE ACCOUNT set IS_SELLER = '1';
+end;
+/
+INSERT INTO AUCTION VALUES ('7', 'harrypotter', '01-SEP-2016','01-SEP-2017', 
+  30.00, 'Potion', 'Pollyjuice', 'Misc');
+SELECT * FROM ACCOUNT
+WHERE username = 'harrypotter';
