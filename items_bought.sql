@@ -6,6 +6,7 @@
 -- has feedback so the page can display a link to add feedback only when 
 -- appropriate. The left join to customer is to get the seller's email, but 
 -- because a seller is not required to enter their email, it may be null.
+set linesize 500;
 select item_id, item_name, item_category, start_time, end_time, starting_price, 
   current_bid, seller, email, has_feedback(item_id) as has_feedback
 from expanded_auction left join customer on seller = username
