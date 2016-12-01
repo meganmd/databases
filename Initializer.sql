@@ -6,30 +6,33 @@ DROP TABLE account CASCADE CONSTRAINTS;
 CREATE TABLE account (
   username varchar(15) not null,
   password varchar(25) not null,
+  phone char(10),
+  email varchar(254),
+  fname varchar(25),
+  lname varchar(25),
   is_admin char default 0 not null check(is_admin in (0,1)),
-  is_seller char default 0 not null check(is_seller in (0,1)),  
   CONSTRAINT pk_account primary key(username)
   -- I don't believe we actually need an is_seller attribute because 
   -- an account becomes a seller when they list an item for auction
 );
 
 --Customer
-DROP TABLE customer CASCADE CONSTRAINTS;
-CREATE TABLE customer (
-  username varchar(15) not null,
-  phone char(10),
-  email varchar(254),
-  fname varchar(25),
-  lname varchar(25),
-  CONSTRAINT pk_customer primary key(username),
-  CONSTRAINT fk_customer_to_account 
-    foreign key(username) references account(username)
-    on delete cascade
-  -- more constraints:
-  -- admins cannot be customers
-  -- could have email format constraint
-  -- also could have constraint that phone be numbers
-);
+--DROP TABLE customer CASCADE CONSTRAINTS;
+--CREATE TABLE customer (
+--  username varchar(15) not null,
+--  phone char(10),
+--  email varchar(254),
+--  fname varchar(25),
+--  lname varchar(25),
+--  CONSTRAINT pk_customer primary key(username),
+--  CONSTRAINT fk_customer_to_account 
+--    foreign key(username) references account(username)
+--    on delete cascade
+--  -- more constraints:
+--  -- admins cannot be customers
+--  -- could have email format constraint
+--  -- also could have constraint that phone be numbers
+--);
 
 --Auction
 DROP TABLE auction CASCADE CONSTRAINTS;

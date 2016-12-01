@@ -7,7 +7,7 @@ SELECT account.USERNAME as username,
        seller_average_rating(account.username) as rating,
        seller_number_of_auctions(account.username) as commissions
        
-FROM account left join customer on account.username = customer.username
+FROM account 
 where exists (
   Select * from auction 
   where seller = account.username
