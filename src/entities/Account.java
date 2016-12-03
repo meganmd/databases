@@ -98,19 +98,24 @@ public class Account {
 	}
 	
 	public void createAccount(String username, String password, Boolean isAdmin, String phone, String email, String fname, String lname){
-		String sql = "";
+		String sql = "INSERT INTO account values('RonW', 'oops', '333333333', 'rbweasley@hogwarts.edu', 'Ronald', 'Weasley'";
 		ResultSet results = executeStatement(sql);
 		
 	}
 	
-	public ResultSet getAccountInfo() throws IllegalStateException{
-		return null;
+	public ResultSet getAccountInfo(String username) throws IllegalStateException{
+		String sql = "SELECT * FROM account WHERE username= " +username;
+		ResultSet results = executeStatement(sql);
+		return results;
 	}
 	
 	public void updateAccount(String username, String password, Boolean isAdmin, String phone, String email, String fname, String lname){
+		
 	}
 	
 	public void deleteAccount(String username){
+		String sql = "DELETE from account WHERE username="+username;
+		ResultSet results = executeStatement(sql);
 	}
 	
 	public ResultSet auctionsWon(String username) throws IllegalStateException{
@@ -122,8 +127,11 @@ public class Account {
 	}
 	
 	public ResultSet getUserList()throws IllegalStateException{
-		return null;
+		String sql = "SELECT * FROM Account";
+		ResultSet results = executeStatement(sql);
+		return results;
 	}
+	
 	
 	
 	public void giveFeedback(String auction, String overallRating, String qualityRating, String deliveryRating, String comments ){
