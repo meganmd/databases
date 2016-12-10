@@ -1,5 +1,8 @@
+package entities;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,43 +11,43 @@ public class Bid {
 	
 	//Create J Unit test file for Auction and Bid
 
-	private static int auctionid;
+	private int auctionid;
 
-	private static String customer;
+	private String customer;
 
-	private static String time;
+	private String time;
 
-	private static int maximumBidLimit;
+	private int maximumBidLimit;
 
-	public static int getAuctionid() {
+	public int getAuctionid() {
 		return auctionid;
 	}
 
-	public static void setAuctionid(int auctionid) {
+	public void setAuctionid(int auctionid) {
 		this.auctionid = auctionid;
 	}
 
-	public static String getCustomer() {
+	public String getCustomer() {
 		return customer;
 	}
 
-	public static void setCustomer(String customer) {
+	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
 
-	public static String getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public static void setTime(String time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
-	public static int getMaximumBidLimit() {
+	public int getMaximumBidLimit() {
 		return maximumBidLimit;
 	}
 
-	public static void setMaximumBidLimit(int maximumBidLimit) {
+	public void setMaximumBidLimit(int maximumBidLimit) {
 		this.maximumBidLimit = maximumBidLimit;
 	}
 	
@@ -77,12 +80,43 @@ public class Bid {
 	
 	//Create 
 	public void createBid(int auctionid, String customer, String time, int maximumBidLimit){
-		ResultSet results = executeStatement(sql);
+		try{
+			ResultSet results;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String query = "INSERT INTO BID values(?, ?, ?) WHERE auctionid like ?";
+			stmt=con.prepareStatement(query);
+			stmt.setString(1, customer);
+			stmt.setString(2, time);
+			stmt.setInt(3, maximumBidLimit);
+			stmt.setInt(4, auctionid);
+			results = stmt.executeQuery();
+			stmt.close();
+			con.close();
+		}
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}	
 	}
 	
 	//getBidInfo
-	public void getBidInfo(int auctionid, String customer, String time, int maximumBidLimit){
-		ResultSet results = executeStatement(sql);
-		return results;
+	public ResultSet getBidInfo(int auctionid, String customer, String time, int maximumBidLimit){
+		try{
+			ResultSet results;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT * FROM bid WHERE auctionId= ?";
+			stmt=con.prepareStatement(query);
+			stmt.setInt(1, auctionid);
+			results = stmt.executeQuery();
+			stmt.close();
+			con.close();
+			
+			return results;
+		}
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}	
+		return null;
 	}
 }
