@@ -3,6 +3,7 @@ package entities;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -124,16 +125,71 @@ public class Auction {
 	}*/
 	  
 	public void createAuction(int itemid, String seller, String startTime, String endTime, String itemName, String itemDescription, String itemCategory){
-	//	ResultSet results = executeStatement(sql);
+		try{
+//should be generating itemid not letting user input
+			ResultSet results;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String query = "INSERT INTO auction values(?,?,?,?,?,?,?)";
+			stmt=con.prepareStatement(query);
+			stmt.setInt(1, itemid);
+			stmt.setString(2, seller);
+			stmt.setString(3, startTime);
+			stmt.setString(4, itemName);
+			stmt.setString(5, itemDescription);
+			stmt.setString(6, itemCategory);
+			results = stmt.executeQuery();
+			stmt.close();
+			con.close();
+		}
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}	
 	}
 		//getBidderList -using items_bid_on.sql
-	public void getBidderList(int itemid, String seller, String startTime, String endTime, String itemName, String itemDescription, String itemCategory){
-		String sql = "";
-	//	ResultSet results = executeStatement(sql);
+	public ResultSet getAuctionInfo(int auctionId) throws IllegalStateException{
+		try{
+			ResultSet results;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT * FROM Account where auctionId= ?";
+			stmt=con.prepareStatement(query);
+			stmt.setInt(1, auctionId);
+			results = stmt.executeQuery();
+			stmt.close();
+			con.close();
+			
+			return results;	
+			
+		}
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}	
+		return null;
+		
 		
 	}
-		//getWinner
+	
+	public ResultSet getBidderList(int auctionId) throws IllegalStateException{
+		try{
+			ResultSet results;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT b.CUSOTMER, b.BID_TIME, b.MAXIMUM_BID_LIMIT, ea.WINNER FROM BID b, EXPANDED_AUCTION ea where auctionId= ?";
+			stmt=con.prepareStatement(query);
+			stmt.setInt(1, auctionId);
+			results = stmt.executeQuery();
+			stmt.close();
+			con.close();
+			
+			return results;	
+			
+		}
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}	
+		return null;
 		
-		//resultset getAuction
+	}
 		
 }
