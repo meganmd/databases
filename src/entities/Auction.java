@@ -61,10 +61,11 @@ public class Auction {
 	}
 	
 	public String getEndTime() {
-		return endTime;uteQuery(sql);
-		return results;
-		} catch (SQLException E) {
-		      E.printStackTrace();
+	//	return endTime;uteQuery(sql);
+	//	return results;
+	//	} catch (SQLException E) {
+	//	      E.printStackTrace();
+		return null;
 	}
 	
 	public void setEndTime(String endTime) {
@@ -123,18 +124,16 @@ public class Auction {
 	}*/
 	  
 	public void createAuction(int itemid, String seller, String startTime, String endTime, String itemName, String itemDescription, String itemCategory){
-		ResultSet results = executeStatement(sql);
+	//	ResultSet results = executeStatement(sql);
 	}
 		//getBidderList -using items_bid_on.sql
 	public void getBidderList(int itemid, String seller, String startTime, String endTime, String itemName, String itemDescription, String itemCategory){
-		String sql = 
-		ResultSet results = executeStatement(sql);
+		String sql = "";
+	//	ResultSet results = executeStatement(sql);
 		
 	}
 		//getWinner
 		
 		//resultset getAuction
 		
-	}
-
 }
