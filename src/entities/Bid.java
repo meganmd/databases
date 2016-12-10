@@ -6,8 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.io.Serializable;
 
-public class Bid {
+public class Bid implements Serializable{
 	
 	//Create J Unit test file for Auction and Bid
 

@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.*;
 import oracle.jdbc.*;
 
-public class Account {
+public class Account implements Serializable {
 	
 	private String username;
 	private String password;

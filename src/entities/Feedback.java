@@ -8,7 +8,7 @@ import oracle.jdbc.*;
 
 
 
-public class Feedback {
+public class Feedback implements Serializable{
 	
 	private String auction;
 	private String overallRating;
