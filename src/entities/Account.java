@@ -99,7 +99,7 @@ public class Account {
 	}
 	
 	public void createAccount(String username, String password, Boolean isAdmin, String phone, String email, String fname, String lname){
-		String sql = "INSERT INTO account values('RonW', 'oops', '333333333', 'rbweasley@hogwarts.edu', 'Ronald', 'Weasley'";
+		String sql = "INSERT INTO account values('RonW', 'oops', '333333333', 'rbweasley@hogwarts.edu', 'Ronald', 'Weasley')";
 		ResultSet results = executeStatement(sql);
 		
 	}
