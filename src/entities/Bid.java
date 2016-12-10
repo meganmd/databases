@@ -21,7 +21,7 @@ public class Bid {
 	}
 
 	public static void setAuctionid(int auctionid) {
-		Bid.auctionid = auctionid;
+		this.auctionid = auctionid;
 	}
 
 	public static String getCustomer() {
@@ -29,7 +29,7 @@ public class Bid {
 	}
 
 	public static void setCustomer(String customer) {
-		Bid.customer = customer;
+		this.customer = customer;
 	}
 
 	public static String getTime() {
@@ -37,7 +37,7 @@ public class Bid {
 	}
 
 	public static void setTime(String time) {
-		Bid.time = time;
+		this.time = time;
 	}
 
 	public static int getMaximumBidLimit() {
@@ -45,7 +45,7 @@ public class Bid {
 	}
 
 	public static void setMaximumBidLimit(int maximumBidLimit) {
-		Bid.maximumBidLimit = maximumBidLimit;
+		this.maximumBidLimit = maximumBidLimit;
 	}
 	
 	
@@ -81,4 +81,8 @@ public class Bid {
 	}
 	
 	//getBidInfo
+	public void getBidInfo(int auctionid, String customer, String time, int maximumBidLimit){
+		ResultSet results = executeStatement(sql);
+		return results;
+	}
 }
