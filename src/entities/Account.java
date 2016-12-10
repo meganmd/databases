@@ -14,6 +14,7 @@ public class Account {
 	private String email;
 	private String fname;
 	private String lname;
+	private boolean isLoggedIn;
 	
 	public String getUsername() {
 		return username;
@@ -70,6 +71,13 @@ public class Account {
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
+	public Boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+
+	public void isLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn=false;
+	}
 
 	public Connection openDBConnection() {
 	    try {
@@ -85,7 +93,7 @@ public class Account {
 	    return null;
 	  }
 	
-	public ResultSet executeStatement(String sql){
+/*	public ResultSet executeStatement(String sql){
 		try{
 		Connection con = openDBConnection();
 		Statement stmt = con.createStatement();
@@ -97,45 +105,152 @@ public class Account {
 		return null;
 		
 	}
-	
+	*/
+	public boolean login(){
+		try{
+			ResultSet results;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String username = this.getUsername();
+			String password = this.getPassword();
+			String query = "SELECT username FROM ACCOUNT WHERE username like ? AND password like ?";
+			stmt=con.prepareStatement(query);
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			results = stmt.executeQuery();
+			if(results.next()){
+				this.isLoggedIn=true;
+			}
+			else{
+				this.isLoggedIn=false;
+			}
+			stmt.close();
+			con.close();
+		}
+		catch(SQLException e){
+			System.out.println("SQL issue: " + e);
+		}
+		return isLoggedIn;
+	}
 	public void createAccount(String username, String password, Boolean isAdmin, String phone, String email, String fname, String lname){
-		String sql = "INSERT INTO account values('RonW', 'oops', '333333333', 'rbweasley@hogwarts.edu', 'Ronald', 'Weasley')";
-		ResultSet results = executeStatement(sql);
+		try{
+			ResultSet results;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String query = "INSERT INTO account values(?, ?, ?,?, ?, ?)";
+			stmt=con.prepareStatement(query);
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			stmt.setBoolean(3, isAdmin);
+			stmt.setString(4, phone);
+			stmt.setString(5, email);
+			stmt.setString(6, fname);
+			stmt.setString(7, lname);
+			results = stmt.executeQuery();
+			stmt.close();
+			con.close();
+		}
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}	
 		
 	}
 	
 	public ResultSet getAccountInfo(String username) throws IllegalStateException{
-		String sql = "SELECT * FROM account WHERE username= " +username;
-		ResultSet results = executeStatement(sql);
-		return results;
-	}
-	
-	public void updateAccount(String username, String password, Boolean isAdmin, String phone, String email, String fname, String lname){
+		try{
+			ResultSet results;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT * FROM account WHERE username= ?";
+			stmt=con.prepareStatement(query);
+			stmt.setString(1, username);
+			results = stmt.executeQuery();
+			stmt.close();
+			con.close();
+			
+			return results;
+		}
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}	
+		return null;
+		
 		
 	}
 	
+	public void updateAccount(String username, String password, String phone, String email, String fname, String lname){
+		
+			ResultSet results = null;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String query = "UPDATE ACCOUNT SET PASSWORD = ?, PHONE = ?, EMAIL = ?, FNAME = ?, LNAME = ? WHERE username like ?";
+		try{
+			stmt=con.prepareStatement(query);
+			stmt.setString(1, password);
+			stmt.setString(2, phone);
+			stmt.setString(3, email);
+			stmt.setString(4, fname);
+			stmt.setString(5, lname);
+			stmt.setString(6, username);
+			results = stmt.executeQuery();
+			stmt.close();
+			con.close();
+		}
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}	
+	}
+	
 	public void deleteAccount(String username){
-		String sql = "DELETE from account WHERE username="+username;
-		ResultSet results = executeStatement(sql);
+		try{
+			ResultSet results;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String query = "DELETE from account WHERE username= ?";
+			stmt=con.prepareStatement(query);
+			stmt.setString(1, username);
+			results = stmt.executeQuery();
+			stmt.close();
+			con.close();
+		}
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}	
 	}
 	
-	public ResultSet auctionsWon(String username) throws IllegalStateException{
-		return null;
-	}
 	
-	public ResultSet userBids(String username) throws IllegalStateException{
-		return null;
-	}
+	//public ResultSet auctionsWon(String username) throws IllegalStateException{
+		//return null;
+	//}
+	
+	//public ResultSet userBids(String username) throws IllegalStateException{
+		//return null;
+	//}
 	
 	public ResultSet getUserList()throws IllegalStateException{
-		String sql = "SELECT * FROM Account";
-		ResultSet results = executeStatement(sql);
-		return results;
+		try{
+			ResultSet results;
+			Connection con = openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT * FROM Account";
+			stmt=con.prepareStatement(query);
+			results = stmt.executeQuery();
+			stmt.close();
+			con.close();
+			
+			return results;	
+			
+		}
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}	
+		return null;
+		
 	}
 	
 	
-	public void giveFeedback(String auction, String overallRating, String qualityRating, String deliveryRating, String comments ){
-	}
+	//public void giveFeedback(String auction, String overallRating, String qualityRating, String deliveryRating, String comments ){
+	//}
 	
 	public ResultSet salesSummaryReport() throws IllegalStateException{
 		return null;
