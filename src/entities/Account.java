@@ -95,6 +95,7 @@ public class Account {
 		      E.printStackTrace();
 		    }
 		return null;
+		
 	}
 	
 	public void createAccount(String username, String password, Boolean isAdmin, String phone, String email, String fname, String lname){
@@ -131,7 +132,6 @@ public class Account {
 		ResultSet results = executeStatement(sql);
 		return results;
 	}
-	
 	
 	
 	public void giveFeedback(String auction, String overallRating, String qualityRating, String deliveryRating, String comments ){
