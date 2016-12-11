@@ -11,6 +11,7 @@
       Item Search
     </h1>
     <table>
+    <form method = "post" action = "SearchAction.jsp" name = "Search">
       <tr>
         <td>
           <label for = "itemID">Item ID</label>
@@ -60,12 +61,15 @@
       </tr>
       <tr>
         <td>
-          <button>Search</button>
+          <input name = "Search" type = "submit"></input>
+          <!-- <button>Search</button>-->
         </td>
         <td>
-          <button>Cancel</button>
+          <input type = "reset"></input>
+          <!-- <button>Cancel</button>-->
         </td>
       </tr>
+    </form>
     </table>
 </body>
 </html>
