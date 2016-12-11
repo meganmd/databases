@@ -124,7 +124,7 @@ public class Auction {
 		return null;
 	}*/
 	  
-	public void createAuction(int itemid, String seller, String startTime, String endTime, String itemName, String itemDescription, String itemCategory){
+	public void createAuction(){
 		try{
 //should be generating itemid not letting user input
 			ResultSet results;
@@ -132,12 +132,12 @@ public class Auction {
 			PreparedStatement stmt;
 			String query = "INSERT INTO auction values(?,?,?,?,?,?,?)";
 			stmt=con.prepareStatement(query);
-			stmt.setInt(1, itemid);
-			stmt.setString(2, seller);
-			stmt.setString(3, startTime);
-			stmt.setString(4, itemName);
-			stmt.setString(5, itemDescription);
-			stmt.setString(6, itemCategory);
+			stmt.setInt(1, this.getItemid());
+			stmt.setString(2, this.getSeller());
+			stmt.setString(3, this.getStartTime());
+			stmt.setString(4, this.getItemName());
+			stmt.setString(5, this.getItemDescription());
+			stmt.setString(6, this.getItemCategory());
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
@@ -147,14 +147,14 @@ public class Auction {
 			}	
 	}
 		//getBidderList -using items_bid_on.sql
-	public ResultSet getAuctionInfo(int auctionId) throws IllegalStateException{
+	public ResultSet getAuctionInfo() throws IllegalStateException{
 		try{
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "SELECT * FROM Account where auctionId= ?";
 			stmt=con.prepareStatement(query);
-			stmt.setInt(1, auctionId);
+			stmt.setInt(1, this.getItemid());
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
@@ -170,14 +170,14 @@ public class Auction {
 		
 	}
 	
-	public ResultSet getBidderList(int auctionId) throws IllegalStateException{
+	public ResultSet getBidderList() throws IllegalStateException{
 		try{
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "SELECT b.CUSOTMER, b.BID_TIME, b.MAXIMUM_BID_LIMIT, ea.WINNER FROM BID b, EXPANDED_AUCTION ea where auctionId= ?";
 			stmt=con.prepareStatement(query);
-			stmt.setInt(1, auctionId);
+			stmt.setInt(1, this.getItemid());
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();

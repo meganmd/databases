@@ -67,7 +67,7 @@ public class Bid implements Serializable{
 	    return null;
 	  }*/
 
-	public ResultSet executeStatement(String sql){
+/*	public ResultSet executeStatement(String sql){
 		try{
 		Connection con = DatabaseConnection.openDBConnection();
 		Statement stmt = con.createStatement();
@@ -78,19 +78,20 @@ public class Bid implements Serializable{
 		    }
 		return null;
 	}
+	*/
 	
 	//Create 
-	public void createBid(int auctionid, String customer, String time, int maximumBidLimit){
+	public void createBid(){
 		try{
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "INSERT INTO BID values(?, ?, ?) WHERE auctionid like ?";
 			stmt=con.prepareStatement(query);
-			stmt.setString(1, customer);
-			stmt.setString(2, time);
-			stmt.setInt(3, maximumBidLimit);
-			stmt.setInt(4, auctionid);
+			stmt.setString(1, this.getCustomer());
+			stmt.setString(2, this.getTime());
+			stmt.setInt(3, getMaximumBidLimit());
+			stmt.setInt(4, getAuctionid());
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
@@ -101,7 +102,7 @@ public class Bid implements Serializable{
 	}
 	
 	//getBidInfo
-	public ResultSet getBidInfo(int auctionid, String customer, String time, int maximumBidLimit){
+	public ResultSet getBidInfo(){
 		try{
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
