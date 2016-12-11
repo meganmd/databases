@@ -132,20 +132,20 @@ public class Account implements Serializable {
 		}
 		return isLoggedIn;
 	}
-	public void createAccount(String username, String password, Boolean isAdmin, String phone, String email, String fname, String lname){
+	public void createAccount(){
 		try{
 			ResultSet results;
 			Connection con = openDBConnection();
 			PreparedStatement stmt;
 			String query = "INSERT INTO account values(?, ?, ?,?, ?, ?)";
 			stmt=con.prepareStatement(query);
-			stmt.setString(1, username);
-			stmt.setString(2, password);
-			stmt.setBoolean(3, isAdmin);
-			stmt.setString(4, phone);
-			stmt.setString(5, email);
-			stmt.setString(6, fname);
-			stmt.setString(7, lname);
+			stmt.setString(1, this.getUsername());
+			stmt.setString(2, this.getPassword());
+			stmt.setBoolean(3, this.isAdmin());
+			stmt.setString(4, this.getPhone());
+			stmt.setString(5, this.getEmail());
+			stmt.setString(6, this.getFname());
+			stmt.setString(7, this.getLname());
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
@@ -156,17 +156,16 @@ public class Account implements Serializable {
 		
 	}
 	
-	public ResultSet getAccountInfo(String username) throws IllegalStateException{
+	public ResultSet getAccountInfo() throws IllegalStateException{
 		try{
 			ResultSet results;
 			Connection con = openDBConnection();
 			PreparedStatement stmt;
 			String query = "SELECT * FROM account WHERE username= ?";
 			stmt=con.prepareStatement(query);
-			stmt.setString(1, username);
+			stmt.setString(1, this.getUsername());
 			results = stmt.executeQuery();
 			stmt.close();
-			con.close();
 			
 			return results;
 		}
@@ -178,7 +177,7 @@ public class Account implements Serializable {
 		
 	}
 	
-	public void updateAccount(String username, String password, String phone, String email, String fname, String lname){
+	public void updateAccount(){
 		
 			ResultSet results = null;
 			Connection con = openDBConnection();
@@ -186,12 +185,12 @@ public class Account implements Serializable {
 			String query = "UPDATE ACCOUNT SET PASSWORD = ?, PHONE = ?, EMAIL = ?, FNAME = ?, LNAME = ? WHERE username like ?";
 		try{
 			stmt=con.prepareStatement(query);
-			stmt.setString(1, password);
-			stmt.setString(2, phone);
-			stmt.setString(3, email);
-			stmt.setString(4, fname);
-			stmt.setString(5, lname);
-			stmt.setString(6, username);
+			stmt.setString(1, this.getPassword());
+			stmt.setString(2, this.getPhone());
+			stmt.setString(3, this.getEmail());
+			stmt.setString(4, this.getFname());
+			stmt.setString(5, this.getLname());
+			stmt.setString(6, this.getUsername());
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
@@ -201,14 +200,14 @@ public class Account implements Serializable {
 			}	
 	}
 	
-	public void deleteAccount(String username){
+	public void deleteAccount(){
 		try{
 			ResultSet results;
 			Connection con = openDBConnection();
 			PreparedStatement stmt;
 			String query = "DELETE from account WHERE username= ?";
 			stmt=con.prepareStatement(query);
-			stmt.setString(1, username);
+			stmt.setString(1, this.getUsername());
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
