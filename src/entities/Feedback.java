@@ -57,7 +57,6 @@ public class Feedback implements Serializable{
 	}
 
 	
-	
 	public void createFeedback(){
 		try{
 			ResultSet results;
