@@ -58,18 +58,26 @@ public class Feedback implements Serializable{
 
 	
 	
-	public void createFeedback(String auction, String overallRating, String qualityRating, String deliveryRating, String comments){
+	public void createFeedback(){
 		try{
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "INSERT INTO auction values(?, ?, ?,?, ?, ?)";
 			stmt=con.prepareStatement(query);
+<<<<<<< HEAD
+			stmt.setString(1, this.getAuction());
+			stmt.setString(2, this.getOverallRating());
+			stmt.setString(3, this.getQualityRating());
+			stmt.setString(4, this.getDeliveryRating());
+			stmt.setString(5, this.getComments());
+=======
 			stmt.setString(1, auction);
 			stmt.setString(2, overallRating);
 			stmt.setString(3, qualityRating);
 			stmt.setString(4, deliveryRating);
 			stmt.setString(5, comments);
+>>>>>>> branch 'master' of https://github.com/meganmd/databases.git
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
@@ -80,14 +88,14 @@ public class Feedback implements Serializable{
 		
 	}
 	
-	public ResultSet getFeedback(String username) throws IllegalStateException{
+	public ResultSet getFeedback(String auction) throws IllegalStateException{
 		try{
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "SELECT * FROM feedback WHERE auction= ?";
 			stmt=con.prepareStatement(query);
-			stmt.setString(1, auction);
+			stmt.setString(1, this.getAuction());
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
@@ -102,3 +110,4 @@ public class Feedback implements Serializable{
 		return null;
 	}
 }
+                               
