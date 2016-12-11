@@ -79,7 +79,8 @@ public class Account implements Serializable {
 		this.isLoggedIn=false;
 	}
 
-	public Connection openDBConnection() {
+	//replaced with DatabaseConnection.openDBConnection()
+	/*public Connection openDBConnection() {
 	    try {
 	      // Load driver and link to driver manager
 	      Class.forName("oracle.jdbc.OracleDriver");
@@ -91,7 +92,7 @@ public class Account implements Serializable {
 	      E.printStackTrace();
 	    }
 	    return null;
-	  }
+	  }*/
 	
 /*	public ResultSet executeStatement(String sql){
 		try{
@@ -109,7 +110,7 @@ public class Account implements Serializable {
 	public boolean login(){
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String username = this.getUsername();
 			String password = this.getPassword();
@@ -135,7 +136,7 @@ public class Account implements Serializable {
 	public void createAccount(String username, String password, Boolean isAdmin, String phone, String email, String fname, String lname){
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "INSERT INTO account values(?, ?, ?,?, ?, ?)";
 			stmt=con.prepareStatement(query);
@@ -159,7 +160,7 @@ public class Account implements Serializable {
 	public ResultSet getAccountInfo(String username) throws IllegalStateException{
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "SELECT * FROM account WHERE username= ?";
 			stmt=con.prepareStatement(query);
@@ -181,7 +182,7 @@ public class Account implements Serializable {
 	public void updateAccount(String username, String password, String phone, String email, String fname, String lname){
 		
 			ResultSet results = null;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "UPDATE ACCOUNT SET PASSWORD = ?, PHONE = ?, EMAIL = ?, FNAME = ?, LNAME = ? WHERE username like ?";
 		try{
@@ -204,7 +205,7 @@ public class Account implements Serializable {
 	public void deleteAccount(String username){
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "DELETE from account WHERE username= ?";
 			stmt=con.prepareStatement(query);
@@ -230,7 +231,7 @@ public class Account implements Serializable {
 	public ResultSet getUserList()throws IllegalStateException{
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "SELECT * FROM Account";
 			stmt=con.prepareStatement(query);

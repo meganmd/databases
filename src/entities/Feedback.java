@@ -61,7 +61,7 @@ public class Feedback implements Serializable{
 	public void createFeedback(String auction, String overallRating, String qualityRating, String deliveryRating, String comments){
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "INSERT INTO auction values(?, ?, ?,?, ?, ?)";
 			stmt=con.prepareStatement(query);
@@ -83,7 +83,7 @@ public class Feedback implements Serializable{
 	public ResultSet getFeedback(String username) throws IllegalStateException{
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "SELECT * FROM feedback WHERE auction= ?";
 			stmt=con.prepareStatement(query);

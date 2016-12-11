@@ -52,8 +52,8 @@ public class Bid implements Serializable{
 		this.maximumBidLimit = maximumBidLimit;
 	}
 	
-	
-	public Connection openDBConnection() {
+	//replaced with DatabaseConnection.openDBConnection()
+	/*public Connection openDBConnection() {
 	    try {
 	      // Load driver and link to driver manager
 	      Class.forName("oracle.jdbc.OracleDriver");
@@ -65,11 +65,11 @@ public class Bid implements Serializable{
 	      E.printStackTrace();
 	    }
 	    return null;
-	  }
+	  }*/
 
 	public ResultSet executeStatement(String sql){
 		try{
-		Connection con = openDBConnection();
+		Connection con = DatabaseConnection.openDBConnection();
 		Statement stmt = con.createStatement();
 		ResultSet results = stmt.executeQuery(sql);
 		return results;
@@ -83,7 +83,7 @@ public class Bid implements Serializable{
 	public void createBid(int auctionid, String customer, String time, int maximumBidLimit){
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "INSERT INTO BID values(?, ?, ?) WHERE auctionid like ?";
 			stmt=con.prepareStatement(query);
@@ -104,7 +104,7 @@ public class Bid implements Serializable{
 	public ResultSet getBidInfo(int auctionid, String customer, String time, int maximumBidLimit){
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "SELECT * FROM bid WHERE auctionId= ?";
 			stmt=con.prepareStatement(query);

@@ -97,8 +97,8 @@ public class Auction {
 		this.itemCategory = itemCategory;
 	}
 	
-	
-	public Connection openDBConnection() {
+	//replaced with DatabaseConnection.openDBConnection()
+	/*public Connection openDBConnection() {
 	    try {
 	      // Load driver and link to driver manager
 	      Class.forName("oracle.jdbc.OracleDriver");
@@ -110,7 +110,7 @@ public class Auction {
 	      E.printStackTrace();
 	    }
 	    return null;
-	  }
+	  }*/
 	
 	/*public ResultSet executeStatement(String sql){
 		try{
@@ -128,7 +128,7 @@ public class Auction {
 		try{
 //should be generating itemid not letting user input
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "INSERT INTO auction values(?,?,?,?,?,?,?)";
 			stmt=con.prepareStatement(query);
@@ -150,7 +150,7 @@ public class Auction {
 	public ResultSet getAuctionInfo(int auctionId) throws IllegalStateException{
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "SELECT * FROM Account where auctionId= ?";
 			stmt=con.prepareStatement(query);
@@ -173,7 +173,7 @@ public class Auction {
 	public ResultSet getBidderList(int auctionId) throws IllegalStateException{
 		try{
 			ResultSet results;
-			Connection con = openDBConnection();
+			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
 			String query = "SELECT b.CUSOTMER, b.BID_TIME, b.MAXIMUM_BID_LIMIT, ea.WINNER FROM BID b, EXPANDED_AUCTION ea where auctionId= ?";
 			stmt=con.prepareStatement(query);
