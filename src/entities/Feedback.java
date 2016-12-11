@@ -67,7 +67,7 @@ public class Feedback implements Serializable{
 			stmt=con.prepareStatement(query);
 			stmt.setString(1, auction);
 			stmt.setString(2, overallRating);
-			stmt.setBoolean(3, qualityRating);
+			stmt.setString(3, qualityRating);
 			stmt.setString(4, deliveryRating);
 			stmt.setString(5, comments);
 			results = stmt.executeQuery();
