@@ -16,7 +16,48 @@ public class Feedback implements Serializable{
 	private String deliveryRating;
 	private String comments;
 	
+	public String getAuction() {
+		return auction;
+	}
 
+	public void setAuction(String auction) {
+		this.auction = auction;
+	}
+
+	public String getOverallRating() {
+		return overallRating;
+	}
+
+	public void setOverallRating(String overallRating) {
+		this.overallRating = overallRating;
+	}
+	
+	public String getQualityRating() {
+		return qualityRating;
+	}
+
+	public void setQualityRating(String qualityRating) {
+		this.qualityRating = qualityRating;
+	}
+	
+	public String getDeliveryRating() {
+		return deliveryRating;
+	}
+
+	public void setDeliveryRating(String deliveryRating) {
+		this.deliveryRating = deliveryRating;
+	}
+	
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	
+	
 	public void createFeedback(String auction, String overallRating, String qualityRating, String deliveryRating, String comments){
 		try{
 			ResultSet results;
