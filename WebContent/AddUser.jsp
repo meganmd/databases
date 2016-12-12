@@ -12,21 +12,14 @@
       Add User
     </h1>
     <table>
-      <tr>
-        <td>
-          <label for = "userId">User Id</label>
-        </td>
-        <td>
+      
         <form method="post" action= "AddUser_action.jsp" name="AddUser">
-          <input id = "userId"></input>
-        </td>
-      </tr>
       <tr>
         <td>
           <label for="username">Username</label>
         </td>
         <td>
-          <input></input>
+          <input name = "username"></input>
         </td>
       </tr>
       <tr>
