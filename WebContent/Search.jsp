@@ -11,7 +11,7 @@
       Item Search
     </h1>
     <table>
-    <form method = "post" action = "SearchAction.jsp" name = "Search">
+    <form method = "get" action = "SearchResults.jsp" name = "Search">
       <tr>
         <td>
           <label for = "itemID">Item ID</label>

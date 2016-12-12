@@ -1,5 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<jsp:useBean id="search" class="entities.Search" scope="session"/> 
+<jsp:setProperty name="search" property="*"/> 
+<%       
+    ResultSet rs = search.searchDatabase();
+%> 
+
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +18,13 @@
 	<h1>
       Search Results
     </h1>
+    <% 
+    	if(!rs.next()) {
+    %>
+    	<h3>No matching auctions.</h3>
+    <%
+    	} else {
+    %>
     <table>
       <tr>
         <th>
@@ -37,24 +52,27 @@
         <th>
         </th>
       </tr>
+    <%
+    		do {
+    %>
       <tr>
         <td>
-          10111
+          <%=rs.getString("item_id")%>
         </td>
         <td>
-          Fundamentals of Database Systems
+          <%=rs.getString("item_title")%>
         </td>
         <td>
-          Book
+          <%=rs.getString("item_category")%>
         </td>
         <td>
-          2/5/16
+          <%=rs.getString("start_date")%>
         </td>
         <td>
-          4/5/16
+          <%=rs.getString("end_date")%>
         </td>
         <td>
-          $70
+          <%=rs.getString("current_bid")%>
         </td>
         <td>
           <a href="">Info</a>
@@ -65,34 +83,12 @@
           <a href="">Bid</a>
         </td>
       </tr>
-      <tr>
-        <td>
-          10123
-        </td>
-        <td>
-          Elementary Algorithms
-        </td>
-        <td>
-          Book
-        </td>
-        <td>
-          2/7/16
-        </td>
-        <td>
-          4/7/16
-        </td>
-        <td>
-          $30
-        </td>
-        <td>
-          <a href="">Info</a>
-        </td>
-        <td>
-        </td>
-        <td>
-          <a href="">Bid</a>
-        </td>
-      </tr>
+    <% 
+    		} while(rs.next());
+    %>
     </table>
+    <%
+    	} 
+    %>
 </body>
 </html>
