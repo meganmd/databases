@@ -150,6 +150,7 @@ public class Account implements Serializable {
 			stmt.setString(5, this.getEmail());
 			stmt.setString(6, this.getFname());
 			stmt.setString(7, this.getLname());
+			stmt.setString(2, this.getPassword());
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
