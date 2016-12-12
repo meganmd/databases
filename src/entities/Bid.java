@@ -88,12 +88,12 @@ public class Bid implements Serializable{
 			time = timestamp.toString();
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
-			String sql = "INSERT INTO BID values(?, ?, ?) WHERE auctionid like ?";
+			String sql = "INSERT INTO BID values(?, ?, ?, ?)";
 			stmt=con.prepareStatement(sql);
-			stmt.setString(1, this.getCustomer());
-			stmt.setString(2, this.getTime());
-			stmt.setDouble(3, getMaximumBidLimit());
-			stmt.setInt(4, getAuctionid());
+			stmt.setInt(1, this.getAuctionid());
+			stmt.setString(2, this.getCustomer());
+			stmt.setString(3, this.getTime());
+			stmt.setDouble(4, getMaximumBidLimit());
 			stmt.execute();
 			stmt.close();
 			con.close();
