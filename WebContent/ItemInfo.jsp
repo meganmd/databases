@@ -1,5 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="auction" class = "entities.Auction" scope = "page"/>
+<jsp:setProperty name = "auction" property = "*"/>
+<%
+	auction.populateAuctionInfo();
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +22,7 @@
           Item ID
         </td>
         <td>
-          10111
+          <%=auction.getItemid() %>
         </td>
       </tr>
       <tr>
@@ -24,7 +30,7 @@
           Item name:
         </td>
         <td>
-          Fundamentals of Database Systems
+		  <%=auction.getItemName() %>
         </td>
       </tr>
       <tr>
@@ -32,7 +38,7 @@
           Category:
         </td>
         <td>
-          Books
+		  <%=auction.getItemCategory() %>
         </td>
       </tr>
       <tr>
@@ -40,7 +46,7 @@
           Start Price:
         </td>
         <td>
-          $70
+		  <%=auction.getStartingPrice() %>
         </td>
       </tr>
       <tr>
@@ -48,7 +54,7 @@
           Auction Start Date:
         </td>
         <td>
-          2/5/16
+          <%=auction.getStartTime() %>	  
         </td>
       </tr>
       <tr>
@@ -56,7 +62,7 @@
           Auction End Date:
         </td>
         <td>
-          4/5/16
+		  <%=auction.getEndTime() %>
         </td>
       </tr>
       <tr>
@@ -64,7 +70,7 @@
           Description:
         </td>
         <td>
-          Book for class
+		  <%=auction.getItemDescription() %>
         </td>
       </tr>
     </table>

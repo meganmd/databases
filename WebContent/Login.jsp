@@ -6,9 +6,9 @@
 <body>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp; <span style="font-weight: bold;">Account Login</span><br>
 <form method="post" action="Login_action.jsp" name="Login">
 <br>
-Username:&nbsp;&nbsp;&nbsp; <input name="Username"><br>
+Username:&nbsp;&nbsp;&nbsp; <input name="username"><br>
 <br>
-Password:&nbsp;&nbsp;&nbsp;&nbsp; <input name="Password"><br>
+Password:&nbsp;&nbsp;&nbsp;&nbsp; <input name="password"><br>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input name="Login" value="Login" type="submit"><br>
 </form>

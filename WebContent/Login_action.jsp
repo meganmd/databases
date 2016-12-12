@@ -5,11 +5,12 @@
 <%
 	boolean validCredentials = account.login();
 	System.out.println(account.isLoggedIn() + " " + account.getUsername() + "" + validCredentials);
-	if(validCredentials == true){
-		response.sendRedirect("AccountHome.html");
-		}
-	else {
+	if(account.isLoggedIn() && account.isAdmin()){
+		response.sendRedirect("AdminHome.jsp");
+	} else if(account.isLoggedIn() && !account.isAdmin()) {
+		response.sendRedirect("UserHome.jsp");
+	} else {
 		System.out.println("Boo");
 		response.sendRedirect("Login.jsp");
-		}
+	}
 %>
