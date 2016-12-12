@@ -9,32 +9,21 @@
 <body>
 	  <body>
     <h1>
-      Add Item
+      Add User
     </h1>
     <table>
       <tr>
         <td>
-          <label for = "itemName">Item Name</label>
+          <label for = "userId">User Id</label>
         </td>
         <td>
-        <form method="post" action= "AddItem_action.jsp" name="AddItem">
-          <input id = "itemName"></input>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="category">Category</label>
-        </td>
-        <td>
-          <select>
-            <option></option>
-            <option>Book</option>
-          </select>
+        <form method="post" action= "AddUser_action.jsp" name="AddUser">
+          <input id = "userId"></input>
         </td>
       </tr>
       <tr>
         <td>
-          <label>Start Price:</label>
+          <label for="username">Username</label>
         </td>
         <td>
           <input></input>
@@ -42,35 +31,51 @@
       </tr>
       <tr>
         <td>
-          <label>Auction Starts:</label>
+          <label for="fname">First Name</label>
         </td>
         <td>
-          9/12/16
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label>Auction Ends:</label>
-        </td>
-        <td>
-          <input type="datetime-local"></input>
+          <input></input>
         </td>
       </tr>
       <tr>
         <td>
-          <label>Description:</label>
+          <label for="lname">Last Name</label>
         </td>
         <td>
-          <textarea></textarea>
+          <input></input>
         </td>
       </tr>
       <tr>
         <td>
-          <input name="Add" value="Add Item" type="submit"/><br>
+          <label for="Email">Email</label>
+        </td>
+        <td>
+          <input></input>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="password">Password</label>
+        </td>
+        <td>
+          <input></input>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="retypePassword">Retype Password</label>
+        </td>
+        <td>
+          <input></input>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input name="Add" value="Add User" type="submit"/><br>
         </td>
         </form>
         <td>
-        <a href="SellerHome.jsp"> <button>Cancel</button></a>
+        <a href="AdminHome.jsp"> <button>Cancel</button></a>
           <br>
         
         </td>
