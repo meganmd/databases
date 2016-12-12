@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.io.Serializable;
 
 public class Bid implements Serializable{
@@ -18,7 +19,7 @@ public class Bid implements Serializable{
 
 	private String time;
 
-	private int maximumBidLimit;
+	private double maximumBidLimit;
 
 	public int getAuctionid() {
 		return auctionid;
@@ -44,7 +45,7 @@ public class Bid implements Serializable{
 		this.time = time;
 	}
 
-	public int getMaximumBidLimit() {
+	public double getMaximumBidLimit() {
 		return maximumBidLimit;
 	}
 
@@ -83,21 +84,22 @@ public class Bid implements Serializable{
 	//Create 
 	public void createBid(){
 		try{
-			ResultSet results;
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			time = timestamp.toString();
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
-			String query = "INSERT INTO BID values(?, ?, ?) WHERE auctionid like ?";
-			stmt=con.prepareStatement(query);
+			String sql = "INSERT INTO BID values(?, ?, ?) WHERE auctionid like ?";
+			stmt=con.prepareStatement(sql);
 			stmt.setString(1, this.getCustomer());
 			stmt.setString(2, this.getTime());
-			stmt.setInt(3, getMaximumBidLimit());
+			stmt.setDouble(3, getMaximumBidLimit());
 			stmt.setInt(4, getAuctionid());
-			results = stmt.executeQuery();
+			stmt.execute();
 			stmt.close();
 			con.close();
 		}
 		catch(SQLException e){
-				System.out.println("SQL issue: " + e);
+				e.printStackTrace();
 			}	
 	}
 	
@@ -117,8 +119,8 @@ public class Bid implements Serializable{
 			return results;
 		}
 		catch(SQLException e){
-				System.out.println("SQL issue: " + e);
-			}	
+			e.printStackTrace();
+		}	
 		return null;
 	}
 }

@@ -165,8 +165,8 @@ public class Auction {
 			con.close();
 		}
 		catch(SQLException e){
-				System.out.println("SQL issue: " + e);
-			}	
+			e.printStackTrace();
+		}	
 	}
 		//getBidderList -using items_bid_on.sql
 	public ResultSet getAuctionInfo() throws IllegalStateException{
@@ -185,8 +185,8 @@ public class Auction {
 			
 		}
 		catch(SQLException e){
-				System.out.println("SQL issue: " + e);
-			}	
+			e.printStackTrace();
+		}	
 		return null;
 	}
 	public void populateAuctionInfo() {
@@ -212,12 +212,8 @@ public class Auction {
 			}
 			stmt.close();
 			con.close();
-			
-			if(!results.next()) {
-			}
-			
 		} catch(SQLException e){
-				System.out.println("SQL issue: " + e);
+			e.printStackTrace();
 		}	
 	}
 	
@@ -237,8 +233,8 @@ public class Auction {
 			
 		}
 		catch(SQLException e){
-				System.out.println("SQL issue: " + e);
-			}	
+			e.printStackTrace();
+		}	
 		return null;
 		
 	}

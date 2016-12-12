@@ -260,7 +260,7 @@ public class Account implements Serializable {
 		return null;
 	}
 	
-	public ResultSet overalCommissionReport() throws IllegalStateException{
+	public ResultSet overallCommissionReport() throws IllegalStateException{
 		return null;
 	}
 

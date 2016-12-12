@@ -46,8 +46,9 @@
           <label for="maximumBidLimit">Maximum Bid Limit:</label>
         </td>
         <td>
-          <form action="PlaceBidAction.jsp">
-          <input id ="maximumBidLimit" name = "maximumBidLimit"></input>
+          <form action="PlaceBidAction.jsp" method="post">
+          <input name = "auctionid" type = "hidden" "<%out.write(auction.getItemid());%>" />
+          <input id ="maximumBidLimit" type = number name = "maximumBidLimit"></input>
         </td>
       </tr>
       <tr>
