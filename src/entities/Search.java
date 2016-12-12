@@ -48,7 +48,7 @@ public class Search {
 			conditionValues.add(this.itemId);			
 		}
 		if(keyword != null) {
-			conditions.add("item_name like '?' OR item_description like '?' ");
+			conditions.add("item_name like ? OR item_description like ? ");
 			conditionValues.add("%" + this.keyword + "%");
 			conditionValues.add("%" + this.keyword + "%");
 		}

@@ -60,16 +60,16 @@
           <%=rs.getString("item_id")%>
         </td>
         <td>
-          <%=rs.getString("item_title")%>
+          <%=rs.getString("item_name")%>
         </td>
         <td>
           <%=rs.getString("item_category")%>
         </td>
         <td>
-          <%=rs.getString("start_date")%>
+          <%=rs.getString("start_time")%>
         </td>
         <td>
-          <%=rs.getString("end_date")%>
+          <%=rs.getString("end_time")%>
         </td>
         <td>
           <%=rs.getString("current_bid")%>

@@ -14,10 +14,10 @@
     <form method = "get" action = "SearchResults.jsp" name = "Search">
       <tr>
         <td>
-          <label for = "itemID">Item ID</label>
+          <label for = "itemId">Item ID</label>
         </td>
         <td>
-          <input id = "itemID"></input>
+          <input id = "itemId" name = "itemId"></input>
         </td>
       </tr>
       <tr>
@@ -25,7 +25,7 @@
           <label for="keyword">Keyword</label>
         </td>
         <td>
-          <input id="keyword"></input>
+          <input id="keyword" name = "keyword"></input>
         </td>
       </tr>
       <tr>
@@ -33,7 +33,7 @@
           <label for="category">Category</label>
         </td>
         <td>
-          <select>
+          <select name = "category">
             <option></option>
             <option>Book</option>
           </select>
@@ -44,8 +44,8 @@
           <label>Current Bid</label>
         </td>
         <td>
-          <label for="currentBidMin">Min:</label> <input id ="currentBidMin"></input>
-          <label for="currentBidMax">Max:</label> <input id ="currentBidMax"></input>
+          <label for="currentBidMin">Min:</label> <input id ="currentBidMin" name = "currentBidMin"></input>
+          <label for="currentBidMax">Max:</label> <input id ="currentBidMax" name = "currentBidMax"></input>
         </td>
       </tr>
       <tr>
@@ -54,9 +54,9 @@
         </td>
         <td>
           <label for="timePeriodStart">Start:</label>
-          <input id = "timePeriodStart" type="datetime-local"></input>
+          <input id = "timePeriodStart" type="datetime-local" name = "timePeriodStart"></input>
           <label for="timePeriodEnd">End:</label>
-          <input id = "timePeriodEnd" type="datetime-local"></input>
+          <input id = "timePeriodEnd" type="datetime-local" name = "timePeriodEnd"></input>
         </td>
       </tr>
       <tr>
