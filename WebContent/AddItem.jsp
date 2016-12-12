@@ -17,6 +17,7 @@
           <label for = "itemName">Item Name</label>
         </td>
         <td>
+        <form method="post" action= "AddItem_action.jsp" name="AddItem">
           <input id = "itemName"></input>
         </td>
       </tr>
@@ -65,10 +66,13 @@
       </tr>
       <tr>
         <td>
-          <button>Add</button>
+          <input name="Add" value="Add Item" type="submit"/><br>
         </td>
+        </form>
         <td>
-          <button>Cancel</button>
+        <a href="SellerHome.jsp"> <button>Cancel</button></a>
+          <br>
+        
         </td>
       </tr>
     </table>

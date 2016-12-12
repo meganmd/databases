@@ -8,7 +8,7 @@
 	if(account.isLoggedIn() && account.isAdmin()){
 		response.sendRedirect("AdminHome.jsp");
 	} else if(account.isLoggedIn() && !account.isAdmin()) {
-		response.sendRedirect("UserHome.jsp");
+		response.sendRedirect("AccountHome.jsp");
 	} else {
 		System.out.println("Boo");
 		response.sendRedirect("Login.jsp");
