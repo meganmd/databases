@@ -1,5 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="auction" class = "entities.Auction" scope = "page"/>
+<jsp:setProperty name = "auction" property = "*"/>
+<%
+	auction.populateAuctionInfo();
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +22,7 @@
           Item ID:
         </td>
         <td>
-          10111
+          <%=auction.getItemid() %>
         </td>
       </tr>
       <tr>
@@ -24,7 +30,7 @@
           Item Name:
         </td>
         <td>
-          Fundamentals of Database Systems
+          <%=auction.getItemName() %>
         </td>
       </tr>
       <tr>
@@ -32,24 +38,26 @@
           Current Bid:
         </td>
         <td>
-          $70.00
+          <%=auction.getCurrentBid() == -1 ? "No bids yet. Starting price: " + auction.getStartingPrice() : auction.getCurrentBid() %>
         </td>
       </tr>
       <tr>
         <td>
-          <label for="maxBid">Maximum Bid Limit:</label>
+          <label for="maximumBidLimit">Maximum Bid Limit:</label>
         </td>
         <td>
-          <input id ="maxBid"></input>
+          <form action="PlaceBidAction.jsp">
+          <input id ="maximumBidLimit" name = "maximumBidLimit"></input>
         </td>
       </tr>
       <tr>
         <td>
-          <button>Bid on Item</button>
+          <input type = "submit" name = "Place Bid"></input>
         </td>
         <td>
-          <button>Cancel</button>
+          <input type = "reset"/>
         </td>
+        </form>
       </tr>
     </table>
 </body>

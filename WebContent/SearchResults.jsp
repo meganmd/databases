@@ -1,4 +1,4 @@
-<%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import = "java.sql.*, org.apache.http.client.utils.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <jsp:useBean id="search" class="entities.Search" scope="page"/> 
@@ -72,15 +72,15 @@
           <%=rs.getString("end_time")%>
         </td>
         <td>
-          <%=rs.getString("current_bid")%>
+          <%=rs.getString("current_bid")!=null ? rs.getString("current_bid") : "None yet"%>
         </td>
         <td>
-          <a href="">Info</a>
+          <a href = <%="ItemInfo.jsp?itemid=" + rs.getString("item_id")%>>Info</a>
         </td>
         <td>
         </td>
         <td>
-          <a href="">Bid</a>
+          <a href=<%="PlaceBid.jsp?itemid=" + rs.getString("item_id")%>>Bid</a>
         </td>
       </tr>
     <% 

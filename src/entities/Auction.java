@@ -10,9 +10,9 @@ import java.sql.Statement;
 
 public class Auction {
 	//Create J Unit test file for Auction and Bid
-	private int itemid;
+	private int itemId = -1;
 	
-	private String seller;
+	private String sellerId;
 	
 	
 	private String startTime;
@@ -24,6 +24,28 @@ public class Auction {
 	private String itemDescription;
 	
 	private String itemCategory;
+	
+	private double startingPrice = -1;
+	
+	private double currentBid = -1;
+
+	
+	public double getCurrentBid() {
+		return currentBid;
+	}
+
+	public void setCurrentBid(double currentBid) {
+		this.currentBid = currentBid;
+	}
+
+	public double getStartingPrice() {
+		return startingPrice;
+	}
+
+	public void setStartingPrice(double startingPrice) {
+		this.startingPrice = startingPrice;
+	}
+
 	
 	
 	//Variable of type database connection
@@ -38,19 +60,19 @@ public class Auction {
 	
 	//Setter and Getters
 	public int getItemid() {
-		return itemid;
+		return itemId;
 	}
 	
 	public void setItemid(int itemid) {
-		this.itemid = itemid;
+		this.itemId = itemid;
 	}
 	
 	public String getSeller() {
-		return seller;
+		return sellerId;
 	}
 	
 	public void setSeller(String seller) {
-		this.seller = seller;
+		this.sellerId = seller;
 	}
 	
 	public String getStartTime() {
@@ -152,12 +174,12 @@ public class Auction {
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
-			String query = "SELECT * FROM Account where auctionId= ?";
+			String query = "SELECT * FROM Auction where item_id= ?";
 			stmt=con.prepareStatement(query);
 			stmt.setInt(1, this.getItemid());
 			results = stmt.executeQuery();
-			stmt.close();
-			con.close();
+			//stmt.close();
+			//con.close();
 			
 			return results;	
 			
@@ -166,8 +188,37 @@ public class Auction {
 				System.out.println("SQL issue: " + e);
 			}	
 		return null;
-		
-		
+	}
+	public void populateAuctionInfo() {
+		try{
+			ResultSet results;
+			Connection con = DatabaseConnection.openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT * FROM expanded_auction where item_id= ?";
+			stmt=con.prepareStatement(query);
+			stmt.setInt(1, itemId);
+			results = stmt.executeQuery();
+			if(results.next()) {
+				itemCategory = results.getString("item_category");
+				startTime = results.getString("start_time");
+				endTime = results.getString("end_time");
+				itemDescription = results.getString("item_description");
+				itemName = results.getString("item_name");
+				sellerId = results.getString("seller");
+				startingPrice = results.getDouble("starting_price");
+				currentBid = results.getString("current_bid") != null ? Double.parseDouble(results.getString("current_bid")) : -1;
+			} else {
+				throw new IllegalStateException("must specify valid auction id");
+			}
+			stmt.close();
+			con.close();
+			
+			if(!results.next()) {
+			}
+			
+		} catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+		}	
 	}
 	
 	public ResultSet getBidderList() throws IllegalStateException{
