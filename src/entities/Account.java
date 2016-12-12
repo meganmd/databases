@@ -114,24 +114,24 @@ public class Account implements Serializable {
 			PreparedStatement stmt;
 			String username = this.getUsername();
 			String password = this.getPassword();
-			String query = "SELECT username FROM ACCOUNT WHERE username like ? AND password like ?";
+			String query = "SELECT * FROM ACCOUNT WHERE username like ? AND password like ?";
 			stmt=con.prepareStatement(query);
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			results = stmt.executeQuery();
-			if(results.next()){
+			
+			/**if(results.next()){
 				this.isLoggedIn=true;
 			}
 			else{
 				this.isLoggedIn=false;
-			}
-			stmt.close();
-			con.close();
+			}**/
+			return this.isLoggedIn = results.next();
 		}
 		catch(SQLException e){
 			System.out.println("SQL issue: " + e);
+			return false;
 		}
-		return isLoggedIn;
 	}
 	public void createAccount(){
 		try{
