@@ -1,4 +1,4 @@
-<%@ page language="java" import = "java.sql.*, org.apache.http.client.utils.*" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <jsp:useBean id="search" class="entities.Search" scope="page"/> 
