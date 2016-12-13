@@ -223,7 +223,9 @@ public class Auction {
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
-			String query = "SELECT b.CUSOTMER, b.BID_TIME, b.MAXIMUM_BID_LIMIT, ea.WINNER FROM BID b, EXPANDED_AUCTION ea where auctionId= ?";
+			String query = "SELECT CUSTOMER, BID_TIME, MAXIMUM_BID_LIMIT, WINNER " +
+					"FROM BID join EXPANDED_AUCTION on BID.AUCTION_ID = EXPANDED_AUCTION.ITEM_ID " +
+					"WHERE b.AUCTION_ID = ?";
 			stmt=con.prepareStatement(query);
 			stmt.setInt(1, this.getItemid());
 			results = stmt.executeQuery();
