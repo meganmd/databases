@@ -30,7 +30,7 @@ package entitiesTest;
 	public void testGetFeedback() throws SQLException{
 		  try{
 				
-				ResultSet rs = feedback1.getFeedback("0");
+				ResultSet rs = feedback1.getFeedback();
 				
 				   ResultSetMetaData rsmd = rs.getMetaData();
 				   System.out.println("Result Set Values: Get Account Info");
