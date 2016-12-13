@@ -1,13 +1,15 @@
-package entitiesTest;
+package mmdaly.entitiesTest;
 
 	import org.junit.Before;
 	import org.junit.Test;
-	import java.sql.ResultSet;
+
+import mmdaly.entities.Feedback;
+
+import java.sql.ResultSet;
 	import java.sql.ResultSetMetaData;
 	import java.sql.SQLException;
 
 	import org.junit.After;
-	import entities.Feedback;
 
 	public class FeedbackTest {
 
