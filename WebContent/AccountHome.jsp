@@ -16,7 +16,11 @@
 <form method="post" action="LeaveFeedback.jsp" name="LeaveFeedback"> 
 <input value="Leave Feedback" name="Leave Feedback" type="submit"><br> </form>
 
-<form method="post" action="Login.jsp" name="Exit"> 
-<input name="Exit" value="Exit" type="submit"> <input name="View My Feedback" value="View My Feedback" type="submit"><br> </form>
+<form method="post" action="Logout.jsp" name="Logout"> 
+<input name="Exit" value="Exit" type="submit"> 
+
+<input name="View My Feedback" value="View My Feedback" type="submit"><br> </form>
+
+
 
 </body></html>
