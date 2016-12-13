@@ -62,7 +62,7 @@
           <label for="sellerRating">Seller Rating</label>
         </td>
         <td>
-          <input name="sellerRating" value="" readonly><br>
+          <input name="sellerRating" value="<%=account.sellerRating()%>" readonly><br>
         </td>
       </tr>
       <tr>
@@ -70,7 +70,7 @@
           <label for="numSellerRatings">Number of Seller Ratings</label>
         </td>
         <td>
-          <input name="numSellerRatings" value="" readonly><br>
+          <input name="numSellerRatings" value="<%=account.sellerRating()%>" readonly><br>
         </td>
       </tr>
       <tr>
