@@ -68,7 +68,7 @@
           <!-- <button>Search</button>-->
         </td>
         <td>
-          <input type = "reset"></input>
+          <a href="AdminHome.jsp"> <button>Cancel</button></a>
           <!-- <button>Cancel</button>-->
         </td>
       </tr>
