@@ -239,8 +239,6 @@ public class Account implements Serializable {
 			String query = "SELECT * FROM Account";
 			stmt=con.prepareStatement(query);
 			results = stmt.executeQuery();
-			stmt.close();
-			con.close();
 			
 			return results;	
 			
@@ -262,6 +260,20 @@ public class Account implements Serializable {
 	
 	public ResultSet overallCommissionReport() throws IllegalStateException{
 		return null;
+	}
+	
+	public void logout(){
+		isLoggedIn=false;
+		username=null;
+		password=null;
+		phone=null;
+		email=null;
+		fname=null;
+		lname=null;
+		
+		
+		
+		
 	}
 
 }
