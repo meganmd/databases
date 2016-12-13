@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <jsp:useBean id="account" class="entities.Account" scope="session"/>
+    <%
+    if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,7 +40,7 @@
           <label>Start Price:</label>
         </td>
         <td>
-          <input></input>
+          <input name="startingPrice"></input>
         </td>
       </tr>
       <tr>
@@ -45,7 +48,7 @@
           <label>Auction Starts:</label>
         </td>
         <td>
-          9/12/16
+          <input type="datetime-local"></input>
         </td>
       </tr>
       <tr>
@@ -61,7 +64,7 @@
           <label>Description:</label>
         </td>
         <td>
-          <textarea></textarea>
+          <textarea><input name="itemDescription"></input></textarea>
         </td>
       </tr>
       <tr>

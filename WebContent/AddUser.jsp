@@ -30,7 +30,7 @@
           <label for="fname">First Name</label>
         </td>
         <td>
-          <input></input>
+          <input name = "fname"></input>
         </td>
       </tr>
       <tr>
@@ -38,15 +38,24 @@
           <label for="lname">Last Name</label>
         </td>
         <td>
-          <input></input>
+          <input name = "lname"></input>
         </td>
       </tr>
       <tr>
         <td>
-          <label for="Email">Email</label>
+          <label for="email">Email</label>
         </td>
         <td>
-          <input></input>
+          <input name = "email"></input>
+        </td>
+      </tr>
+      <tr>
+      <tr>
+        <td>
+          <label for="phone">Phone</label>
+        </td>
+        <td>
+          <input name = "phone"></input>
         </td>
       </tr>
       <tr>
@@ -54,16 +63,14 @@
           <label for="password">Password</label>
         </td>
         <td>
-          <input></input>
+          <input name = "password"></input>
         </td>
       </tr>
       <tr>
         <td>
           <label for="retypePassword">Retype Password</label>
         </td>
-        <td>
-          <input></input>
-        </td>
+       
       </tr>
       <tr>
         <td>

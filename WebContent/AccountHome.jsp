@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="account" class="entities.Account" scope="session"/>
+    <%
+    if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
     
 <html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>AccountHome</title></head><body>
 <form method="post" action="UpdateProfile.jsp" name="Update">
@@ -13,7 +16,11 @@
 <form method="post" action="LeaveFeedback.jsp" name="LeaveFeedback"> 
 <input value="Leave Feedback" name="Leave Feedback" type="submit"><br> </form>
 
-<form method="post" action="Login.jsp" name="Exit"> 
-<input name="Exit" value="Exit" type="submit"> <input name="View My Feedback" value="View My Feedback" type="submit"><br> </form>
+<form method="post" action="Logout.jsp" name="Logout"> 
+<input name="Exit" value="Exit" type="submit"> 
+
+<input name="View My Feedback" value="View My Feedback" type="submit"><br> </form>
+
+
 
 </body></html>

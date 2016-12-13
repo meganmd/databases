@@ -1,5 +1,8 @@
 <%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <jsp:useBean id="account" class="entities.Account" scope="session"/>
+    <%
+    if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
 <jsp:useBean id="auction" class = "entities.Auction" scope = "page"/>
 <jsp:setProperty name = "auction" property = "*"/>
 <%

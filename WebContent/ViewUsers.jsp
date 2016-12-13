@@ -1,5 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<jsp:useBean id="account" class="entities.Account" scope="page"/> 
+<jsp:setProperty name="search" property="*"/> 
+<%       
+    ResultSet rs = account.getUserList();
+%> 
+    
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +19,75 @@
     <h1>
       User List
     </h1>
+    <% 
+    	if(!rs.next()) {
+    %>
+    	<h3>No matching users.</h3>
+    <%
+    	} else {
+    %>
+    <table>
+      <tr>
+        <th>
+          Username
+        </th>
+        <th>
+          First Name
+        </th>
+        <th>
+          Last Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Phone
+        </th>
+        <th>
+          Password
+        </th>
+        <th>
+          Is Admin
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+      </tr>
+    <%
+    		do {
+    %>
+      <tr>
+        <td>
+          <%=rs.getString("username")%>
+        </td>
+        <td>
+          <%=rs.getString("fname")%>
+        </td>
+        <td>
+          <%=rs.getString("lname")%>
+        </td>
+        <td>
+          <%=rs.getString("email")%>
+        </td>
+        <td>
+          <%=rs.getString("phone")%>
+        </td>
+        <td>
+          <%=rs.getString("password")%>
+        </td>
+        <td>
+          <%=rs.getString("is_admin")%>
+        </td>
+          
+      </tr>
+    <% 
+    		} while(rs.next());
+    %>
+    </table>
+    <%
+    	} 
+    %>
     <table>
       <tr>
         <td>
