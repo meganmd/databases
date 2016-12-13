@@ -96,5 +96,6 @@
     <%
     	} 
     %>
+     <a href="BidderHome.jsp"> <button>Cancel</button></a>
 </body>
 </html>
