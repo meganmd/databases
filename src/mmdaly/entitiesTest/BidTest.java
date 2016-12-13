@@ -18,7 +18,7 @@ public void setUp(){
 bid1 = new Bid();
 
 bid1.setCustomer("user3");
-bid1.setTime("12-02-2016"); 
+bid1.setTime("2016-12-02"); 
 bid1.setMaximumBidLimit(90);
 bid1.setAuctionid(0);
 
@@ -55,12 +55,6 @@ public void testGetBidInfo() throws SQLException{
 	    iae.printStackTrace();
 	   }
 }
-
-
-
-
-
-
 
 
 
