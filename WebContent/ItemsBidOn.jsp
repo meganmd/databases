@@ -4,7 +4,7 @@
     
 <jsp:useBean id="account" class="entities.Account" scope="page"/> 
 <jsp:setProperty name="account" property="*"/> 
-  <%
+    <%
     if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
 <%       
     ResultSet rs = account.itemsBidOn();

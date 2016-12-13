@@ -25,18 +25,22 @@ auction1 = new Auction();
 auction2 = new Auction();
 
 auction1.setItemid(0);
-auction1.setSeller("harrypotter");
+auction1.populateAuctionInfo();
+/*auction1.setSeller("harrypotter");
 auction1.setStartTime(timestamp);//FIX
 auction1.setItemName("Broomstick");//FIX
 auction1.setItemDescription("Nimbus 2001 for sale!!!!");
 auction1.setItemCategory("Vehicles");
+*/
 
-auction1.setItemid(1);
-auction1.setSeller("hermioneG");
+auction2.setItemid(1);
+auction2.populateAuctionInfo();
+/*auction1.setSeller("hermioneG");
 auction1.setStartTime(timestamp);//FIX
 auction1.setItemName("Fantastic Beasts and Where to Find Them");//FIX
 auction1.setItemDescription("Newt Scamanders classic reference book!");
 auction1.setItemCategory("Books");
+*/
 	}
 
 
@@ -79,24 +83,23 @@ public void testGetBidderList() throws SQLException{
 			
 			ResultSet rs = auction1.getBidderList();
 			
-			   ResultSetMetaData rsmd = rs.getMetaData();
-			   System.out.println("Result Set Values: Get Account Info");
-			   int columnsNumber = rsmd.getColumnCount();
-			   System.out.println(columnsNumber);
+		   ResultSetMetaData rsmd = rs.getMetaData();
+		   System.out.println("Result Set Values: Get Account Info");
+		   int columnsNumber = rsmd.getColumnCount();
+		   System.out.println(columnsNumber);
 
-			   while (rs.next()) {
-			       for (int i = 1; i <= columnsNumber; i++) {
-			           if (i > 1) System.out.print(",  ");
-			           String columnValue = rs.getString(i);
-			           System.out.print(rsmd.getColumnName(i) + ": " + columnValue);
-			       }
-			       System.out.println("");
-	  }
-} 
-catch(IllegalArgumentException iae){
+		   while (rs.next()) {
+		       for (int i = 1; i <= columnsNumber; i++) {
+		           if (i > 1) System.out.print(",  ");
+		           String columnValue = rs.getString(i);
+		           System.out.print(rsmd.getColumnName(i) + ": " + columnValue);
+		       }
+		       System.out.println("");
+		   }
+	  } catch(IllegalArgumentException iae){
 	    iae.printStackTrace();
-	   }
-}
+	  }
+	}
 
 
 
@@ -112,17 +115,16 @@ public void tearDown(){
 
 	auction1.setItemid(0);
 	auction1.setSeller("harrypotter");
-	auction1.setStartTime();//FIX
+	//auction1.setStartTime();//FIX
 	auction1.setItemName("Broomstick");//FIX
 	auction1.setItemDescription("Nimbus 2001 for sale!!!!");
 	auction1.setItemCategory("Vehicles");
 
 	auction1.setItemid(1);
 	auction1.setSeller("hermioneG");
-	auction1.setStartTime();//FIX
+	//auction1.setStartTime();//FIX
 	auction1.setItemName("Fantastic Beasts and Where to Find Them");//FIX
 	auction1.setItemDescription("Newt Scamanders classic reference book!");
-	auction1.setItemCategory("Books");S
-		
-		}
+	auction1.setItemCategory("Books");
+	}
 }
