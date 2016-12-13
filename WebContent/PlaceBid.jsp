@@ -50,7 +50,7 @@
         </td>
         <td>
           <form action="PlaceBidAction.jsp" method="post">
-          <input name = "auctionid" type = "hidden" "<%out.write(auction.getItemid());%>" />
+          <input name = "auctionid" type = "hidden" value=<%=auction.getItemid() %> />
           <input id ="maximumBidLimit" type = number name = "maximumBidLimit"></input>
         </td>
       </tr>
