@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Auction {
 	//Create J Unit test file for Auction and Bid
@@ -14,10 +17,9 @@ public class Auction {
 	
 	private String sellerId;
 	
+	private Timestamp startTime;
 	
-	private String startTime;
-	
-	private String endTime;
+	private Timestamp endTime;
 	
 	private String itemName;
 	
@@ -76,23 +78,29 @@ public class Auction {
 	}
 	
 	public String getStartTime() {
-		return startTime;
+		return startTime.toString();
 	}
 	
 	public void setStartTime(String startTime) {
-		this.startTime = startTime;
+		try {
+			Date sd = new SimpleDateFormat("yyyy-MM-dd").parse(startTime);
+			this.startTime = new Timestamp(sd.getTime());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getEndTime() {
-	//	return endTime;uteQuery(sql);
-	//	return results;
-	//	} catch (SQLException E) {
-	//	      E.printStackTrace();
-		return null;
+		return endTime.toString();
 	}
 	
 	public void setEndTime(String endTime) {
-		this.endTime = endTime;
+		try {
+			Date sd = new SimpleDateFormat("yyyy-MM-dd").parse(endTime);
+			this.endTime = new Timestamp(sd.getTime());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getItemName() {
@@ -118,33 +126,6 @@ public class Auction {
 	public void setItemCategory(String itemCategory) {
 		this.itemCategory = itemCategory;
 	}
-	
-	//replaced with DatabaseConnection.openDBConnection()
-	/*public Connection openDBConnection() {
-	    try {
-	      // Load driver and link to driver manager
-	      Class.forName("oracle.jdbc.OracleDriver");
-	      // Create a connection to the specified database
-	      Connection myConnection = DriverManager.getConnection("jdbc:oracle:thin:@//cscioraclesrv.ad.csbsju.edu:1521/" +
-	                                                            "csci.cscioraclesrv.ad.csbsju.edu","team4", "Pds3D");
-	      return myConnection;
-	    } catch (Exception E) {
-	      E.printStackTrace();
-	    }
-	    return null;
-	  }*/
-	
-	/*public ResultSet executeStatement(String sql){
-		try{
-		Connection con = openDBConnection();
-		Statement stmt = con.createStatement();
-		ResultSet results = stmt.executeQuery(sql);
-		return results;
-		} catch (SQLException E) {
-		      E.printStackTrace();
-		    }
-		return null;
-	}*/
 	  
 	public void createAuction(){
 		try{
@@ -156,8 +137,8 @@ public class Auction {
 			stmt=con.prepareStatement(query);
 			stmt.setInt(1, this.getItemid());
 			stmt.setString(2, this.getSeller());
-			stmt.setString(3, this.getStartTime());
-			stmt.setString(4, this.getEndTime());
+			stmt.setTimestamp(3, this.startTime);
+			stmt.setTimestamp(4, this.endTime);
 			stmt.setString(5, this.getItemName());
 			stmt.setString(6, this.getItemDescription());
 			stmt.setString(7, this.getItemCategory());
@@ -201,13 +182,13 @@ public class Auction {
 			results = stmt.executeQuery();
 			if(results.next()) {
 				itemCategory = results.getString("item_category");
-				startTime = results.getString("start_time");
-				endTime = results.getString("end_time");
+				startTime = results.getTimestamp("start_time");
+				endTime = results.getTimestamp("end_time");
 				itemDescription = results.getString("item_description");
 				itemName = results.getString("item_name");
 				sellerId = results.getString("seller");
 				startingPrice = results.getDouble("starting_price");
-				currentBid = results.getString("current_bid") != null ? Double.parseDouble(results.getString("current_bid")) : -1;
+				currentBid = results.getString("current_bid") != null ? results.getDouble("current_bid") : results.getDouble("starting_price");
 			} else {
 				throw new IllegalStateException("must specify valid auction id");
 			}
@@ -225,12 +206,10 @@ public class Auction {
 			PreparedStatement stmt;
 			String query = "SELECT CUSTOMER, BID_TIME, MAXIMUM_BID_LIMIT, WINNER " +
 					"FROM BID join EXPANDED_AUCTION on BID.AUCTION_ID = EXPANDED_AUCTION.ITEM_ID " +
-					"WHERE b.AUCTION_ID = ?";
+					"WHERE AUCTION_ID = ?";
 			stmt=con.prepareStatement(query);
 			stmt.setInt(1, this.getItemid());
 			results = stmt.executeQuery();
-			stmt.close();
-			con.close();
 			
 			return results;	
 			
