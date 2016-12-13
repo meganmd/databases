@@ -12,9 +12,11 @@
 <form method="post" action="ViewUsers.jsp" name="View Users">
 <input name="View Users" value="View Users" type="submit"><br> </form>
 <br>
-<form method="post" action="ViewReports.jsp" name="ViewReports">
-<input name="View Reports" value="View Reports" type="submit"><br> </form>
+<form method="post" action="SummaryReports.jsp" name="SummaryReport">
+<input name="Summary Report" value="Summary Report" type="submit"><br> </form>
 <br>
+<form method="post" action="CommissionReport.jsp" name="CommissionReport">
+<input name="Commission Report" value="Commission Report" type="submit"><br> </form>
 
 <form method="post" action="Logout_action.jsp" name="Logout"> 
 <input name="Exit" value="Exit" type="submit"> 
