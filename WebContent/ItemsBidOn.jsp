@@ -2,10 +2,8 @@
     pageEncoding="UTF-8"%>
     
     
-<jsp:useBean id="account" class="entities.Account" scope="page"/> 
-<jsp:setProperty name="account" property="*"/> 
-    <%
-    if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
+<jsp:useBean id="account" class="entities.Account" scope="session"/> 
+
 <%       
     ResultSet rs = account.itemsBidOn();
 %> 

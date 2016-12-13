@@ -294,14 +294,18 @@ public class Account implements Serializable {
 	
 	public ResultSet itemsBidOn() throws IllegalStateException{
 			try{
+				System.out.println(username);
 				ResultSet results;
 				Connection con = DatabaseConnection.openDBConnection();
 				PreparedStatement stmt;
-				String query = "SELECT item_id, item_name, item_category, start_time, starting_price, current_bid, status " +
+				String query = "SELECT item_id, item_name, item_category, start_time, end_time, starting_price, bid_time, current_bid, status, winner " +
 						"FROM BID join EXPANDED_AUCTION on BID.AUCTION_ID = EXPANDED_AUCTION.ITEM_ID " +
-						"WHERE SELLER = ?";
+						"WHERE SELLER = ? and bid_time = "
+							+ "(Select max(bid_time) FROM BID join "
+							+ "EXPANDED_AUCTION on BID.AUCTION_ID = EXPANDED_AUCTION.ITEM_ID where seller = ?)";
 				stmt=con.prepareStatement(query);
 				stmt.setString(1, this.getUsername());
+				stmt.setString(2, this.getUsername());
 				results = stmt.executeQuery();
 				
 				return results;	
@@ -319,7 +323,8 @@ public class Account implements Serializable {
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
-			String query = "SELECT auction_id, overall_rating, quality_rating, delivery_rating, comments FROM expanded_auction join FEEDBACK on expanded_auction.item_id = feedback.auction  WHERE seller = ?";
+			String query = "SELECT item_id, overall_rating, quality_rating, delivery_rating, comments "
+					+"FROM expanded_auction join FEEDBACK on expanded_auction.item_id = feedback.auction  WHERE seller = ?";
 			stmt=con.prepareStatement(query);
 			stmt.setString(1, this.getUsername());
 			results = stmt.executeQuery();
@@ -329,7 +334,7 @@ public class Account implements Serializable {
 		}
 		
 		catch(SQLException e){
-				System.out.println("SQL issue: " + e);
+				e.printStackTrace();
 			}
 		
 		return null;

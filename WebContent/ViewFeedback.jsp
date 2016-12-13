@@ -1,8 +1,7 @@
 <%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<jsp:useBean id="account" class="entities.Account" scope="page"/> 
-<jsp:setProperty name="account" property="*"/> 
+<jsp:useBean id="account" class="entities.Account" scope="session"/> 
     <%
     if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
 <%       
@@ -54,7 +53,7 @@
     %>
       <tr>
         <td>
-          <%=rs.getString("auction")%>
+          <%=rs.getString("item_id")%>
         </td>
         <td>
           <%=rs.getString("overall_rating")%>
