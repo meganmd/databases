@@ -129,7 +129,7 @@ public class Auction {
 	  
 	public void createAuction(){
 		try{
-//should be generating itemid not letting user input
+			this.itemId = generateItemId();
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
@@ -139,9 +139,10 @@ public class Auction {
 			stmt.setString(2, this.getSeller());
 			stmt.setTimestamp(3, this.startTime);
 			stmt.setTimestamp(4, this.endTime);
-			stmt.setString(5, this.getItemName());
-			stmt.setString(6, this.getItemDescription());
-			stmt.setString(7, this.getItemCategory());
+			stmt.setDouble(5, startingPrice);
+			stmt.setString(6, this.getItemName());
+			stmt.setString(7, this.getItemDescription());
+			stmt.setString(8, this.getItemCategory());
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
@@ -150,6 +151,24 @@ public class Auction {
 			e.printStackTrace();
 		}	
 	}
+	
+	private int generateItemId(){
+		try {
+			Connection con = DatabaseConnection.openDBConnection();
+			String sql = "Select max(item_id) as last_id from auction";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			int next = 0;
+		if(rs.next()) {
+			next = rs.getInt("last_id") + 1;
+		}
+		return next;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 		//getBidderList -using items_bid_on.sql
 	public ResultSet getAuctionInfo() throws IllegalStateException{
 		try{

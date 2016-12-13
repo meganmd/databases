@@ -3,7 +3,7 @@
     <jsp:useBean id="account" class="entities.Account" scope="session"/>
     <%
     if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html SYSTEM "about:legacy-compat">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,27 +12,24 @@
 <body>
 	  <body>
     <h1>
-      Add Item
+      Add Auction
     </h1>
+    <form type = "post" action ="AddItem_action.jsp">
     <table>
       <tr>
         <td>
           <label for = "itemName">Item Name</label>
         </td>
         <td>
-        <form method="post" action= "AddItem_action.jsp" name="AddItem">
-          <input id = "itemName"></input>
+          <input id = "itemName" name="itemName"></input>
         </td>
       </tr>
       <tr>
         <td>
-          <label for="category">Category</label>
+          <label for="category" >Category</label>
         </td>
         <td>
-          <select>
-            <option></option>
-            <option>Book</option>
-          </select>
+          <input id ="category" name="itemCategory"/>
         </td>
       </tr>
       <tr>
@@ -40,23 +37,23 @@
           <label>Start Price:</label>
         </td>
         <td>
-          <input name="startingPrice"></input>
+          <input name="startingPrice" type = "number" name="startingPrice"></input>
         </td>
       </tr>
       <tr>
         <td>
-          <label>Auction Starts:</label>
+          <label>Auction Starts (yyyy-MM-dd):</label>
         </td>
         <td>
-          <input type="datetime-local"></input>
+          <input type="date" name="startTime"></input>
         </td>
       </tr>
       <tr>
         <td>
-          <label>Auction Ends:</label>
+          <label>Auction Ends (yyyy-MM-dd):</label>
         </td>
         <td>
-          <input type="datetime-local"></input>
+          <input type="date" name="endTime"></input>
         </td>
       </tr>
       <tr>
@@ -64,7 +61,7 @@
           <label>Description:</label>
         </td>
         <td>
-          <textarea><input name="itemDescription"></input></textarea>
+          <textarea name="itemDescription"></textarea>
         </td>
       </tr>
       <tr>
@@ -79,5 +76,6 @@
         </td>
       </tr>
     </table>
+   </form>
 </body>
 </html>

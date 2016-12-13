@@ -36,10 +36,7 @@
           <label for="category">Category</label>
         </td>
         <td>
-          <select name = "category">
-            <option></option>
-            <option>Book</option>
-          </select>
+          <input name = "category"/>
         </td>
       </tr>
       <tr>
