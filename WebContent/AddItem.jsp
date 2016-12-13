@@ -37,7 +37,7 @@
           <label>Start Price:</label>
         </td>
         <td>
-          <input></input>
+          <input name="startingPrice"></input>
         </td>
       </tr>
       <tr>
@@ -45,7 +45,7 @@
           <label>Auction Starts:</label>
         </td>
         <td>
-          9/12/16
+          <input type="datetime-local"></input>
         </td>
       </tr>
       <tr>
@@ -61,7 +61,7 @@
           <label>Description:</label>
         </td>
         <td>
-          <textarea></textarea>
+          <textarea><input name="itemDescription"></input></textarea>
         </td>
       </tr>
       <tr>
