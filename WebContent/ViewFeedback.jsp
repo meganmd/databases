@@ -3,6 +3,8 @@
     
 <jsp:useBean id="account" class="entities.Account" scope="page"/> 
 <jsp:setProperty name="account" property="*"/> 
+    <%
+    if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
 <%       
     ResultSet rs = account.getFeedback();
 %> 
@@ -44,9 +46,7 @@
         <th>
           Comments
         </th>
-        <th>
-          Password
-        </th>
+        
         
       </tr>
     <%
@@ -67,9 +67,6 @@
         </td>
         <td>
           <%=rs.getString("comments")%>
-        </td>
-        <td>
-          <%=rs.getString("password")%>
         </td>
           
       </tr>

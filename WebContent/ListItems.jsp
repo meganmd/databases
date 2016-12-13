@@ -1,31 +1,29 @@
 <%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    
-<jsp:useBean id="account" class="entities.Account" scope="page"/> 
-<jsp:setProperty name="account" property="*"/> 
+    <jsp:useBean id="account" class="entities.Account" scope="session"/>
+    <jsp:setProperty name="search" property="*"/> 
     <%
     if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
+
 <%       
-    ResultSet rs = account.itemsBidOn();
+    ResultSet rs = account.listItems();
 %> 
-    
+
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>List Items</title>
 </head>
 <body>
-	  <body>
-    <h1>
-      Items Bid On
+	<h1>
+      List Items
     </h1>
     <% 
     	if(!rs.next()) {
     %>
-    	<h3>No items bid on.</h3>
+    	<h3>No matching items.</h3>
     <%
     	} else {
     %>
@@ -44,17 +42,19 @@
           Auction Start Time
         </th>
         <th>
-          Auction End Time
+          Starting Price
         </th>
         <th>
           Current Bid
         </th>
         <th>
-          Winner
+          Status
         </th>
         <th>
+        	Item Info
         </th>
         <th>
+        	Place Bid
         </th>
       </tr>
     <%
@@ -74,15 +74,22 @@
           <%=rs.getString("start_time")%>
         </td>
         <td>
-          <%=rs.getString("end_time")%>
+          <%=rs.getString("starting_price")%>
         </td>
         <td>
-          <%=rs.getString("current_bid")%>
+          <%=rs.getString("current_bid")!=null ? rs.getString("current_bid") : "None yet"%>
         </td>
         <td>
-          <%=rs.getString("winner")%>
+          <%=rs.getString("status")%>
         </td>
-          
+        <td>
+          <a href = <%="ItemInfo.jsp?itemid=" + rs.getString("item_id")%>>Info</a>
+        </td>
+        <td>
+        </td>
+        <td>
+          <a href=<%="PlaceBid.jsp?itemid=" + rs.getString("item_id")%>>Bid</a>
+        </td>
       </tr>
     <% 
     		} while(rs.next());
@@ -91,14 +98,5 @@
     <%
     	} 
     %>
-    <table>
-      <tr>
-        <td>
-
-        <a href="BidderHome.jsp"> <button>Cancel</button></a>
-          <br>
-        </td>
-      </tr>
-    </table>
 </body>
 </html>

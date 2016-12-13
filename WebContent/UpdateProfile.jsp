@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <jsp:useBean id="account" class="entities.Account" scope="session"/>
     
@@ -62,31 +62,26 @@
           <label for="sellerRating">Seller Rating</label>
         </td>
         <td>
-          <input name="sellerRating" value="<%=account.sellerRating()%>" readonly><br>
+        <%ResultSet rs = account.sellerRating();
+        		  %>
+          <input name="sellerRating" value="<%=rs.next()? rs.getString("num"): "Not rated yet"%>" readonly><br>
+        </td>
+      </tr>
+      
+      <tr>
+        <td>
+          <label for="oldPassword">Old Password</label>
+        </td>
+        <td>
+          <input name = "oldPassword"></input>
         </td>
       </tr>
       <tr>
         <td>
-          <label for="numSellerRatings">Number of Seller Ratings</label>
-        </td>
-        <td>
-          <input name="numSellerRatings" value="<%=account.sellerRating()%>" readonly><br>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="password">Old Password</label>
+          <label for="password">New Password</label>
         </td>
         <td>
           <input name = "password"></input>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="newPassword">New Password</label>
-        </td>
-        <td>
-          <input name = "newPassword"></input>
         </td>
       </tr>
       <tr>

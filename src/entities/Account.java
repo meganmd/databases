@@ -214,6 +214,7 @@ public class Account implements Serializable {
 			}	
 	}
 	
+
 	public void deleteAccount(){
 		try{
 			ResultSet results;
@@ -259,6 +260,26 @@ public class Account implements Serializable {
 		
 	}
 	
+	public ResultSet listItems() throws IllegalStateException{
+		try{
+			ResultSet results;
+			Connection con = DatabaseConnection.openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT item_id, item_name, item_category, start_time, starting_price, current_bid, status " +
+					"FROM EXPANDED_AUCTION WHERE SELLER = ?";
+			stmt=con.prepareStatement(query);
+			stmt.setString(1, this.getUsername());
+			results = stmt.executeQuery();
+			
+			return results;	
+			
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}	
+		return null;
+		
+	}
 	
 	//public void giveFeedback(String auction, String overallRating, String qualityRating, String deliveryRating, String comments ){
 	//}
@@ -276,7 +297,9 @@ public class Account implements Serializable {
 				ResultSet results;
 				Connection con = DatabaseConnection.openDBConnection();
 				PreparedStatement stmt;
-				String query = "SELECT item_id, item_name, item_category, start_time, end_time, current_bid, winner FROM EXPANDED_AUCTION NATURAL JOIN bid WHERE customer = ?";
+				String query = "SELECT item_id, item_name, item_category, start_time, starting_price, current_bid, status " +
+						"FROM BID join EXPANDED_AUCTION on BID.AUCTION_ID = EXPANDED_AUCTION.ITEM_ID " +
+						"WHERE SELLER = ?";
 				stmt=con.prepareStatement(query);
 				stmt.setString(1, this.getUsername());
 				results = stmt.executeQuery();
@@ -296,7 +319,7 @@ public class Account implements Serializable {
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
-			String query = "SELECT auction_id, overall_rating, quality_rating, delivery_rating, comment FROM expanded_auction join FEEDBACK on expanded_auction.item_id = feedback.auction WHERE seller = ?";
+			String query = "SELECT auction_id, overall_rating, quality_rating, delivery_rating, comments FROM expanded_auction join FEEDBACK on expanded_auction.item_id = feedback.auction  WHERE seller = ?";
 			stmt=con.prepareStatement(query);
 			stmt.setString(1, this.getUsername());
 			results = stmt.executeQuery();
@@ -310,6 +333,49 @@ public class Account implements Serializable {
 			}
 		
 		return null;
+	}
+	
+	public ResultSet sellerRating() throws IllegalArgumentException {
+		try{
+			ResultSet results;
+			Connection con = DatabaseConnection.openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT seller_average_rating(?) as num from DUAL";
+			stmt=con.prepareStatement(query);
+			stmt.setString(1, this.getUsername());
+			results = stmt.executeQuery();
+			
+			
+			return results;
+		}
+		
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}
+		
+		return null;
+	
+	}
+	public ResultSet numSellerRatings() throws IllegalArgumentException {
+		try{
+			ResultSet results;
+			Connection con = DatabaseConnection.openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT seller_number_of_ratings(?) as numb from DUAL";
+			stmt=con.prepareStatement(query);
+			stmt.setString(1, this.getUsername());
+			results = stmt.executeQuery();
+			
+			
+			return results;
+		}
+		
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}
+		
+		return null;
+	
 	}
 	
 	public void logout(){
