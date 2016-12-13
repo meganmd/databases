@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="account" class="entities.Account" scope="session"/>
+<jsp:useBean id="account" class="mmdaly.entities.Account" scope="session"/>
     <%
     if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
     

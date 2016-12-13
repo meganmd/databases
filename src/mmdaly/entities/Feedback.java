@@ -1,4 +1,4 @@
-package entities;
+package mmdaly.entities;
 
 import java.sql.ResultSet;
 import java.io.*;

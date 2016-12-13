@@ -1,6 +1,4 @@
-package entitiesTest;
-
-import static org.junit.Assert.*;
+package mmdaly.entitiesTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,9 +8,8 @@ import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.Assert;
-import entities.Account;
-import entities.Feedback;
-import junit.framework.TestCase;
+import mmdaly.entities.Account;
+import mmdaly.entities.Feedback;
 
 public class AccountTest {
 	Account acct;
@@ -59,6 +56,8 @@ public class AccountTest {
 		feedback1.setQualityRating("4");
 		feedback1.setDeliveryRating("5");
 		feedback1.setComments("This is terrriblllee");
+
+		acct7 = new Account();
 
 		
 	}

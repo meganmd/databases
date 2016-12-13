@@ -1,4 +1,4 @@
-package entities;
+package mmdaly.entities;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;

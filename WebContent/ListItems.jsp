@@ -1,7 +1,6 @@
 <%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <jsp:useBean id="account" class="entities.Account" scope="session"/>
-    <jsp:setProperty name="search" property="*"/> 
+    <jsp:useBean id="account" class="mmdaly.entities.Account" scope="session"/> 
     <%
     if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
 
@@ -54,7 +53,7 @@
         	Item Info
         </th>
         <th>
-        	Place Bid
+        	Bid List
         </th>
       </tr>
     <%
@@ -77,7 +76,7 @@
           <%=rs.getString("starting_price")%>
         </td>
         <td>
-          <%=rs.getString("current_bid")!=null ? rs.getString("current_bid") : "None yet"%>
+          <%=rs.getString("current_bid")!=null ? rs.getString("current_bid"):rs.getString("starting_price")%>
         </td>
         <td>
           <%=rs.getString("status")%>
@@ -88,7 +87,7 @@
         <td>
         </td>
         <td>
-          <a href=<%="PlaceBid.jsp?itemid=" + rs.getString("item_id")%>>Bid</a>
+          <a href=<%="ListBids.jsp?itemid=" + rs.getString("item_id")%>>List Bids</a>
         </td>
       </tr>
     <% 
