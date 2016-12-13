@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.io.Serializable;
 
 public class Bid implements Serializable{
@@ -17,7 +19,7 @@ public class Bid implements Serializable{
 
 	private String customer;
 
-	private String time;
+	private Timestamp time;
 
 	private double maximumBidLimit;
 
@@ -38,11 +40,16 @@ public class Bid implements Serializable{
 	}
 
 	public String getTime() {
-		return time;
+		return time.toString();
 	}
 
 	public void setTime(String time) {
-		this.time = time;
+		try {
+			Date sd = new SimpleDateFormat("yyyy-MM-dd").parse(time);
+			this.time = new Timestamp(sd.getTime());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public double getMaximumBidLimit() {
@@ -84,16 +91,16 @@ public class Bid implements Serializable{
 	//Create 
 	public void createBid(){
 		try{
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			time = timestamp.toString();
+			time = new Timestamp(System.currentTimeMillis());
+			System.out.println("current time: " + time.toString());
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
-			String sql = "INSERT INTO BID values(?, ?, ?) WHERE auctionid like ?";
+			String sql = "INSERT INTO BID values(?, ?, ?, ?)";
 			stmt=con.prepareStatement(sql);
-			stmt.setString(1, this.getCustomer());
-			stmt.setString(2, this.getTime());
-			stmt.setDouble(3, getMaximumBidLimit());
-			stmt.setInt(4, getAuctionid());
+			stmt.setInt(1, this.getAuctionid());
+			stmt.setString(2, this.getCustomer());
+			stmt.setTimestamp(3, this.time);
+			stmt.setDouble(4, getMaximumBidLimit());
 			stmt.execute();
 			stmt.close();
 			con.close();
