@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <jsp:useBean id="account" class="entities.Account" scope="session"/>
+    
     <%
     if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,7 +22,7 @@
         </td>
         <td>
         <form method="post" action= "UpdateProfile_action.jsp" name="UpdateProfile">
-          <input id = "username"></input>
+          <input name="username" value="<%=account.getUsername()%>" readonly><br>
         </td>
       </tr>
       <tr>
@@ -29,7 +30,7 @@
           <label for="fname">First Name</label>
         </td>
         <td>
-          <input></input>
+          <input name = "fname"></input>
         </td>
       </tr>
       <tr>
@@ -37,7 +38,7 @@
           <label for="lname">Last Name</label>
         </td>
         <td>
-          <input></input>
+          <input name = "lname"></input>
         </td>
       </tr>
       <tr>
@@ -45,7 +46,7 @@
           <label for="email">Email</label>
         </td>
         <td>
-          <input></input>
+          <input name = "email"></input>
         </td>
       </tr>
       <tr>
@@ -53,15 +54,15 @@
           <label for="phone">Phone</label>
         </td>
         <td>
-          <input></input>
+          <input name = "phone"></input>
         </td>
       </tr>
       <tr>
-        <td>
+      <td>
           <label for="sellerRating">Seller Rating</label>
         </td>
         <td>
-          <input></input>
+          <input name="sellerRating" value="" readonly><br>
         </td>
       </tr>
       <tr>
@@ -69,7 +70,7 @@
           <label for="numSellerRatings">Number of Seller Ratings</label>
         </td>
         <td>
-          <input></input>
+          <input name="numSellerRatings" value="" readonly><br>
         </td>
       </tr>
       <tr>
@@ -77,7 +78,7 @@
           <label for="password">Old Password</label>
         </td>
         <td>
-          <input></input>
+          <input name = "password"></input>
         </td>
       </tr>
       <tr>
@@ -85,7 +86,7 @@
           <label for="newPassword">New Password</label>
         </td>
         <td>
-          <input></input>
+          <input name = "newPassword"></input>
         </td>
       </tr>
       <tr>
@@ -93,7 +94,7 @@
           <label for="retypePassword">Retype Password</label>
         </td>
         <td>
-          <input></input>
+          <input name = "retypePassword"></input>
         </td>
       </tr>
       <tr>

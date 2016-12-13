@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <jsp:useBean id="account" class="entities.Account" scope="page"/> 
-<jsp:setProperty name="search" property="*"/> 
+<jsp:setProperty name="account" property="*"/> 
 <%       
     ResultSet rs = account.getUserList();
 %> 

@@ -69,7 +69,20 @@
       <tr>
         <td>
           <label for="retypePassword">Retype Password</label>
-        </td>
+         </td>
+         <td>
+          <input name = "retypePassword"></input>
+         </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="isAdmin">Is Admin</label>
+         </td>
+         <td><input type="radio" name="isAdmin" value="True"> True<br>
+         	<input type="radio" name="isAdmin" value="False"> False<br>
+ 
+         </td>
+       
        
       </tr>
       <tr>
