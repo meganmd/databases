@@ -79,25 +79,6 @@ public class Feedback implements Serializable{
 		
 	}
 	
-	public ResultSet getFeedback() throws IllegalStateException{
-		try{
-			ResultSet results;
-			Connection con = DatabaseConnection.openDBConnection();
-			PreparedStatement stmt;
-			String query = "SELECT * FROM feedback WHERE auction= ?";
-			stmt=con.prepareStatement(query);
-			stmt.setString(1, this.getAuction());
-			results = stmt.executeQuery();
-			
-			
-			return results;
-		}
-		
-		catch(SQLException e){
-				System.out.println("SQL issue: " + e);
-			}
-		
-		return null;
-	}
+	
 }
                                

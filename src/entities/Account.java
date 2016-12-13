@@ -291,6 +291,27 @@ public class Account implements Serializable {
 			
 		}
 	
+	public ResultSet getFeedback() throws IllegalStateException{
+		try{
+			ResultSet results;
+			Connection con = DatabaseConnection.openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT auction_id, overall_rating, quality_rating, delivery_rating, comment FROM expanded_auction join FEEDBACK on expanded_auction.item_id = feedback.auction WHERE seller = ?";
+			stmt=con.prepareStatement(query);
+			stmt.setString(1, this.getUsername());
+			results = stmt.executeQuery();
+			
+			
+			return results;
+		}
+		
+		catch(SQLException e){
+				System.out.println("SQL issue: " + e);
+			}
+		
+		return null;
+	}
+	
 	public void logout(){
 		isLoggedIn=false;
 		username=null;
