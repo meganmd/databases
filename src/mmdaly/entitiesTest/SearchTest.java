@@ -1,4 +1,4 @@
-package entitiesTest;
+package mmdaly.entitiesTest;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Search;
+import mmdaly.entities.Search;
 
 public class SearchTest {
 

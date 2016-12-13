@@ -1,7 +1,7 @@
 <%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <jsp:useBean id="account" class="entities.Account" scope="session"/>
-    <jsp:useBean id="auction" class="entities.Auction" scope="page"/>
+    <jsp:useBean id="account" class="mmdaly.entities.Account" scope="session"/>
+    <jsp:useBean id="auction" class="mmdaly.entities.Auction" scope="page"/>
     <%
     if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
 

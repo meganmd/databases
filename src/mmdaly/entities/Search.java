@@ -1,4 +1,4 @@
-package entities;
+package mmdaly.entities;
 
 import java.sql.*;
 import java.util.AbstractMap;

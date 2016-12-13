@@ -1,7 +1,7 @@
 <%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<jsp:useBean id="account" class="entities.Account" scope="page"/> 
+<jsp:useBean id="account" class="mmdaly.entities.Account" scope="page"/> 
 <jsp:setProperty name="account" property="*"/> 
 
     <%

@@ -1,4 +1,4 @@
-package entitiesTest;
+package mmdaly.entitiesTest;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Account;
+import mmdaly.entities.Account;
 
 public class AccountTest {
 	Account acct;

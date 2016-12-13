@@ -1,4 +1,4 @@
-package entitiesTest;
+package mmdaly.entitiesTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,48 +10,33 @@ import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.Assert;
-import entities.Auction;
+import entities.Bid;
 import junit.framework.TestCase;
 
-public class AuctionTest {
+public class BidTest {
 
-	Auction auction1,
-			auction2;
+	Bid bid1;
 
 @Before
 public void setUp(){
-auction1 = new Auction();
+bid1 = new Bid();
 
-auction2 = new Auction();
+bid1.setCustomer("user3");
+bid1.setTime(); //Fix This
+bid1.setMaximumBidLimit(90);
+bid1.setAuctionid(0);
 
-auction1.setItemid(0);
-auction1.populateAuctionInfo();
-/*auction1.setSeller("harrypotter");
-auction1.setStartTime(timestamp);//FIX
-auction1.setItemName("Broomstick");//FIX
-auction1.setItemDescription("Nimbus 2001 for sale!!!!");
-auction1.setItemCategory("Vehicles");
-*/
-
-auction2.setItemid(1);
-auction2.populateAuctionInfo();
-/*auction1.setSeller("hermioneG");
-auction1.setStartTime(timestamp);//FIX
-auction1.setItemName("Fantastic Beasts and Where to Find Them");//FIX
-auction1.setItemDescription("Newt Scamanders classic reference book!");
-auction1.setItemCategory("Books");
-*/
 	}
 
 
 
 @Test
-public void testGetAuctionInfo() throws SQLException{ 
+public void testGetBidInfo() throws SQLException{ 
 	  try{
 		    System.out.println("Testing Get Auction Info:");
-			System.out.println(auction1.getItemid());
-			System.out.println(auction1.getSeller());
-			System.out.println(auction1.getStartTime());
+			System.out.println(bid1.getCustomer());
+			System.out.println(bid1.getTime());
+			System.out.println(getMaximumBidLimit());
 			System.out.println(auction1.getItemName());
 			System.out.println(auction1.getItemDescription());
 			System.out.println(auction1.getItemCategory());
@@ -83,23 +68,24 @@ public void testGetBidderList() throws SQLException{
 			
 			ResultSet rs = auction1.getBidderList();
 			
-		   ResultSetMetaData rsmd = rs.getMetaData();
-		   System.out.println("Result Set Values: Get Account Info");
-		   int columnsNumber = rsmd.getColumnCount();
-		   System.out.println(columnsNumber);
+			   ResultSetMetaData rsmd = rs.getMetaData();
+			   System.out.println("Result Set Values: Get Account Info");
+			   int columnsNumber = rsmd.getColumnCount();
+			   System.out.println(columnsNumber);
 
-		   while (rs.next()) {
-		       for (int i = 1; i <= columnsNumber; i++) {
-		           if (i > 1) System.out.print(",  ");
-		           String columnValue = rs.getString(i);
-		           System.out.print(rsmd.getColumnName(i) + ": " + columnValue);
-		       }
-		       System.out.println("");
-		   }
-	  } catch(IllegalArgumentException iae){
-	    iae.printStackTrace();
+			   while (rs.next()) {
+			       for (int i = 1; i <= columnsNumber; i++) {
+			           if (i > 1) System.out.print(",  ");
+			           String columnValue = rs.getString(i);
+			           System.out.print(rsmd.getColumnName(i) + ": " + columnValue);
+			       }
+			       System.out.println("");
 	  }
-	}
+} 
+catch(IllegalArgumentException iae){
+	    iae.printStackTrace();
+	   }
+}
 
 
 
@@ -115,16 +101,17 @@ public void tearDown(){
 
 	auction1.setItemid(0);
 	auction1.setSeller("harrypotter");
-	//auction1.setStartTime();//FIX
+	auction1.setStartTime();//FIX
 	auction1.setItemName("Broomstick");//FIX
 	auction1.setItemDescription("Nimbus 2001 for sale!!!!");
 	auction1.setItemCategory("Vehicles");
 
 	auction1.setItemid(1);
 	auction1.setSeller("hermioneG");
-	//auction1.setStartTime();//FIX
+	auction1.setStartTime();//FIX
 	auction1.setItemName("Fantastic Beasts and Where to Find Them");//FIX
 	auction1.setItemDescription("Newt Scamanders classic reference book!");
-	auction1.setItemCategory("Books");
-	}
+	auction1.setItemCategory("Books");S
+		
+		}
 }
