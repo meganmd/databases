@@ -79,7 +79,7 @@ public class Feedback implements Serializable{
 		
 	}
 	
-	public ResultSet getFeedback(String auction) throws IllegalStateException{
+	public ResultSet getFeedback() throws IllegalStateException{
 		try{
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
@@ -88,8 +88,7 @@ public class Feedback implements Serializable{
 			stmt=con.prepareStatement(query);
 			stmt.setString(1, this.getAuction());
 			results = stmt.executeQuery();
-			stmt.close();
-			con.close();
+			
 			
 			return results;
 		}

@@ -13,14 +13,11 @@
 <form method="post" action="BidderHome.jsp" name="Bidder">                                                                                                                                   
 <input name="Bidding Management" value="Bidding Management" type="submit"><br> </form>
 
-<form method="post" action="LeaveFeedback.jsp" name="LeaveFeedback"> 
-<input value="Leave Feedback" name="Leave Feedback" type="submit"><br> </form>
-
-<form method="post" action="Logout_action.jsp" name="Logout"> 
-<input name="Exit" value="Exit" type="submit"> 
-
+<form method="post" action="ViewFeedback.jsp" name="ViewFeedback"> 
 <input name="View My Feedback" value="View My Feedback" type="submit"><br> </form>
 
+<form method="post" action="Logout_action.jsp" name="Logout"> 
+<input name="Exit" value="Exit" type="submit"> </form>
 
 
 </body></html>

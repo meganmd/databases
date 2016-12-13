@@ -271,6 +271,26 @@ public class Account implements Serializable {
 		return null;
 	}
 	
+	public ResultSet itemsBidOn() throws IllegalStateException{
+			try{
+				ResultSet results;
+				Connection con = DatabaseConnection.openDBConnection();
+				PreparedStatement stmt;
+				String query = "SELECT item_id, item_name, item_category, start_time, end_time, current_bid, winner FROM EXPANDED_AUCTION NATURAL JOIN bid WHERE customer = ?";
+				stmt=con.prepareStatement(query);
+				stmt.setString(1, this.getUsername());
+				results = stmt.executeQuery();
+				
+				return results;	
+				
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}	
+			return null;
+			
+		}
+	
 	public void logout(){
 		isLoggedIn=false;
 		username=null;

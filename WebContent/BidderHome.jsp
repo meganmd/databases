@@ -10,7 +10,7 @@
   <br>
 <br>
 <br>
-<form method="post" action="CheckStatus.jsp" name="CheckStatus">
+<form method="post" action="ItemsBidOn.jsp" name="CheckStatus">
 <input name="Check Status" value="Check Status" type="submit"><br></form>
 <form method="post" action="AccountHome.jsp" name="AccountHome">
 <input name="Return to Menu" value="Return to Menu" type="submit"><br></form>
