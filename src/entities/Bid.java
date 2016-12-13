@@ -21,7 +21,7 @@ public class Bid implements Serializable{
 
 	private Timestamp time;
 
-	private double maximumBidLimit;
+	private double maximumBidLimit = -1;
 
 	public int getAuctionid() {
 		return auctionid;
@@ -56,7 +56,7 @@ public class Bid implements Serializable{
 		return maximumBidLimit;
 	}
 
-	public void setMaximumBidLimit(int maximumBidLimit) {
+	public void setMaximumBidLimit(double maximumBidLimit) {
 		this.maximumBidLimit = maximumBidLimit;
 	}
 	
@@ -89,8 +89,11 @@ public class Bid implements Serializable{
 	*/
 	
 	//Create 
-	public void createBid(){
+	public void createBid() throws IllegalArgumentException{
 		try{
+			if (this.maximumBidLimit <=0) {
+				throw new IllegalArgumentException("maximum bid limit is: " + maximumBidLimit);
+			}
 			time = new Timestamp(System.currentTimeMillis());
 			System.out.println("current time: " + time.toString());
 			Connection con = DatabaseConnection.openDBConnection();

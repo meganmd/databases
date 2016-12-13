@@ -7,6 +7,10 @@
 
 <%
 	bid.setCustomer(account.getUsername());
+	try {
 	bid.createBid();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 	response.sendRedirect("Search.jsp"); //should be to search results...
 %>
