@@ -1,8 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import = "java.sql.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <jsp:useBean id="account" class="entities.Account" scope="session"/>
-    <%
+    
+    
+<jsp:useBean id="account" class="entities.Account" scope="page"/> 
+<jsp:setProperty name="account" property="*"/> 
+  <%
     if(!account.isLoggedIn()) response.sendRedirect("Login.jsp"); %>
+<%       
+    ResultSet rs = account.itemsBidOn();
+%> 
+    
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,9 +18,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>
+	  <body>
+    <h1>
       Items Bid On
     </h1>
+    <% 
+    	if(!rs.next()) {
+    %>
+    	<h3>No items bid on.</h3>
+    <%
+    	} else {
+    %>
     <table>
       <tr>
         <th>
@@ -34,67 +50,53 @@
           Current Bid
         </th>
         <th>
-        </th>
-        <th>
-        </th>
-        <th>
           Winner
         </th>
+        <th>
+        </th>
+        <th>
+        </th>
       </tr>
+    <%
+    		do {
+    %>
       <tr>
         <td>
-          10111
+          <%=rs.getString("item_id")%>
         </td>
         <td>
-          Fundamentals of Database Systems
+          <%=rs.getString("item_name")%>
         </td>
         <td>
-          Book
+          <%=rs.getString("item_category")%>
         </td>
         <td>
-          2/5/16
+          <%=rs.getString("start_time")%>
         </td>
         <td>
-          4/5/16
+          <%=rs.getString("end_time")%>
         </td>
         <td>
-          $70
+          <%=rs.getString("current_bid")%>
         </td>
         <td>
-          <a href="">Info</a>
+          <%=rs.getString("winner")%>
         </td>
-        <td>
-        </td>
-        <td>
-          SallyH
-        </td>
+          
       </tr>
+    <% 
+    		} while(rs.next());
+    %>
+    </table>
+    <%
+    	} 
+    %>
+    <table>
       <tr>
         <td>
-          10123
-        </td>
-        <td>
-          Elementary Algorithms
-        </td>
-        <td>
-          Book
-        </td>
-        <td>
-          2/7/16
-        </td>
-        <td>
-          4/7/16
-        </td>
-        <td>
-          $30
-        </td>
-        <td>
-          <a href="">Info</a>
-        </td>
-        <td>
-        </td>
-        <td>
-          HenryB
+
+        <a href="BidderHome.jsp"> <button>Cancel</button></a>
+          <br>
         </td>
       </tr>
     </table>
