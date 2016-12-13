@@ -285,11 +285,41 @@ public class Account implements Serializable {
 	//}
 	
 	public ResultSet salesSummaryReport() throws IllegalStateException{
+		try{
+			ResultSet results;
+			Connection con = DatabaseConnection.openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT * FROM SALES_SUMMARY_REPORT_VIEW";
+			stmt=con.prepareStatement(query);
+			results = stmt.executeQuery();
+			
+			return results;	
+			
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}	
 		return null;
+		
 	}
 	
 	public ResultSet overallCommissionReport() throws IllegalStateException{
+		try{
+			ResultSet results;
+			Connection con = DatabaseConnection.openDBConnection();
+			PreparedStatement stmt;
+			String query = "SELECT * FROM OVERALL_COMMISSION_REPORT_VIEW";
+			stmt=con.prepareStatement(query);
+			results = stmt.executeQuery();
+			
+			return results;	
+			
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}	
 		return null;
+		
 	}
 	
 	public ResultSet itemsBidOn() throws IllegalStateException{
