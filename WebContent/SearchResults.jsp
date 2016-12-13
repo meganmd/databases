@@ -75,7 +75,7 @@
           <%=rs.getString("end_time")%>
         </td>
         <td>
-          <%=rs.getString("current_bid")!=null ? rs.getString("current_bid") : "None yet"%>
+          <%=rs.getString("current_bid")!=null ? rs.getString("current_bid"):rs.getString("starting_price")%>
         </td>
         <td>
           <a href = <%="ItemInfo.jsp?itemid=" + rs.getString("item_id")%>>Info</a>
@@ -83,7 +83,10 @@
         <td>
         </td>
         <td>
-          <a href=<%="PlaceBid.jsp?itemid=" + rs.getString("item_id")%>>Bid</a>
+          <a href=<%="PlaceBid.jsp?itemid=" + rs.getString("item_id")%>>Place Bid</a>
+        </td>
+        <td>
+          <a href=<%="ListBids.jsp?itemid=" + rs.getString("item_id")%>>Bid List</a>
         </td>
       </tr>
     <% 

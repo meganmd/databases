@@ -73,7 +73,8 @@ public class Search {
 			conditionValues.add(this.timePeriodEnd);
 		}
 		
-		StringBuilder sql = new StringBuilder("SELECT item_id, item_name, item_category, start_time, end_time, current_bid "
+		StringBuilder sql = new StringBuilder("SELECT item_id, item_name, item_category, start_time, end_time, "
+				+ "current_bid, starting_price "
 				+ "FROM expanded_auction ");
 		
 		if (!conditions.isEmpty()) {
