@@ -9,7 +9,7 @@ public class Account implements Serializable {
 	
 	private String username;
 	private String password;
-	private boolean isAdmin;
+	private boolean isAdmin=false;
 	private String phone;
 	private String email;
 	private String fname;
@@ -141,24 +141,33 @@ public class Account implements Serializable {
 			ResultSet results;
 			Connection con = DatabaseConnection.openDBConnection();
 			PreparedStatement stmt;
-			String query = "INSERT INTO account values(?, ?, ?,?, ?, ?)";
+			String query = "INSERT INTO account values(?, ?, ?,?, ?,?, ?)";
 			stmt=con.prepareStatement(query);
 			stmt.setString(1, this.getUsername());
 			stmt.setString(2, this.getPassword());
-			stmt.setBoolean(3, this.isAdmin());
-			stmt.setString(4, this.getPhone());
-			stmt.setString(5, this.getEmail());
-			stmt.setString(6, this.getFname());
-			stmt.setString(7, this.getLname());
-			stmt.setString(2, this.getPassword());
+			stmt.setString(3, this.getPhone());
+			stmt.setString(4, this.getEmail());
+			stmt.setString(5, this.getFname());
+			stmt.setString(6, this.getLname());
+			stmt.setInt(7, this.isAdmin() ? 1 : 0);
 			results = stmt.executeQuery();
 			stmt.close();
 			con.close();
 		}
 		catch(SQLException e){
-				System.out.println("SQL issue: " + e);
+				e.printStackTrace();
 			}	
 		
+	}
+	
+	public void createAccount(String retypePassword)throws IllegalArgumentException{
+		if(retypePassword.equals(this.getPassword())){
+			createAccount();
+		}
+		else{
+			throw new IllegalArgumentException("Passwords must match.");
+			
+		}
 	}
 	
 	public ResultSet getAccountInfo() throws IllegalStateException{
@@ -270,9 +279,7 @@ public class Account implements Serializable {
 		email=null;
 		fname=null;
 		lname=null;
-		
-		
-		
+			
 		
 	}
 

@@ -15,8 +15,9 @@
 <form method="post" action="ViewReports.jsp" name="ViewReports">
 <input name="View Reports" value="View Reports" type="submit"><br> </form>
 <br>
-<form method="post" action="Login.jsp" name="Login">
-<input name="Exit" value="Exit" type="submit"><br> </form>
+
+<form method="post" action="Logout_action.jsp" name="Logout"> 
+<input name="Exit" value="Exit" type="submit"> 
 
 </body></html>
 
